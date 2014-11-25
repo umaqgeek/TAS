@@ -11,6 +11,8 @@
 
 <h1 align="center"><b><i>User Profile</i></b></h1>
 
+<center><form action="" method="post">
+
 <table align="center">
 <tr>
 <td align="center">ID Number</td>
@@ -47,13 +49,21 @@ Man</td>
 <td><input name="email" type="text"></td>
 </tr>
 
+<tr>
+<td>Salary</td>
+<td>:</td>
+<td><input type="number" name="salary"></td>
+</tr>
 </table>
 
 
-<center><form action="" method="post">
+
 <input type="submit" value="Update">
+<input type="reset" value="Reset" name="reset">
 </form>
 </center>
+
+<a href="Admin_User Account.php">Back</a>
 
 </body>
 </html>

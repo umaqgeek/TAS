@@ -1,6 +1,7 @@
 body{
 	margin:0;
 	padding:0;
+	color:#999;
 }
 
 
@@ -9,15 +10,14 @@ body{
 	height:auto;
 	margin-left:370px;
 	margin-right:370px;
-	margin-top:21px;
-	margin-bottom:21px;
+	margin-top:3px;
+	margin-bottom:55px;
 }
 
 #Header {
-	height:67px;
+	height:33px;
 	background-image:url(tuffah1.jpg);
 	background-repeat:no-repeat;
-	margin-bottom:21px;
 		
 }
 
@@ -40,3 +40,5 @@ h1{
 #main{
 	height:55px;
 	background-origin:border-box;
+
+

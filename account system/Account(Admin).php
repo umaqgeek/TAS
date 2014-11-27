@@ -90,7 +90,6 @@
 </table>
 
 </fieldset>
-
 <a href="Admin Account.php">Back</a>
 </body>
 </html>

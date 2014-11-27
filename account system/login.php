@@ -1,10 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Login</title>
-</head>
+<?php
+$dbuser="root";
+$dbpass = "";
+$dbhost = "localhost";
+$db = "user akaun";
+mysql_connect($dbhost, $dbuser, $dbpass);
+mysql_select_db($db);
+session_start();
 
+
+
+if (isset($_POST['username'])){
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$sql = "SELECT * FROM user akaun WHERE username='".$username."' AND password='".$password."'LIMIT 1";
+	$res = mysql_query($sql);
+	if (mysql_num_rows($res) = 0)
+	{
+		$_SESSION['auth']=true;
+		Header ("Location: menu(Home).php");
+		exit();
+	}
+	else{
+		echo "invalid login";
+		echo "Your password or you username is wrong!";
+		exit();
+	}
+}
+?>
     <link rel="stylesheet" href="login_css.css" />
 <body bgcolor="#003333">
 <center>
@@ -16,9 +38,9 @@
 <h1 align="center" font>Account System</h1>
   <h2 align="center">Log in</h2>
   
-  <form action="loginProcess.php" method="post">
-  <input type="text" name="Username" placeholder="Username"/><br /><br />
-    <input type="password" name="Password" placeholder="Password" />
+  <form action="login.php" method="post">
+  <input type="text" name="username" placeholder="Username"/><br /><br />
+    <input type="password" name="password" placeholder="Password" />
     <input type="submit" value="Log in" />
     
     </form>
@@ -27,4 +49,4 @@
 </center>
 </fieldset>
 </body>
-</html>
+

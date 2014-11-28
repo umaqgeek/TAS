@@ -1,4 +1,25 @@
+<?php
 
+require("connect.php");
+$name = $_POST['name'];
+$comment = $_POST['comment'];
+$submit = $_POST['submit'];
+
+if($submit)
+{
+	if( $name && $comment )
+	{
+		$insert = mysql_query("INSERT INTO camment ('username', 'comment') VALUES ('$name','$comment')");
+	}
+	else{
+		echo "Please fill out the fields";
+	}
+}
+
+?>
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en"><head>
@@ -89,8 +110,11 @@
   </tr>
 </table>
 
-<a>Write your comment here :</a>
-<input name="Comment" type="text" size="55" maxlength="77">
+<a>Write your comment here :</a><br />
+<a>Username :</a>
+<input type="text" name="name"><br />
+<input name="Comment" type="text" size="55" maxlength="77" placeholder="Comment"><br />
+<input type="submit" name="submit"></fieldset>
 
 </fieldset>
 </div>

@@ -1,21 +1,20 @@
 <?php
 
-require("connect.php");
-$id = $_POST['id'];
-$username = $_POST['name'];
-$pass = $_POST['password'];
-$Fname = $_POST['fname'];
-$ic = $_POST['ic'];
-$tel = $_POST['phone'];
-$Email = $_POST['email'];
-$address = $_POST['address'];
-$submit = $_POST['submit'];
+require("connect_manageUser.php");
+$name=$_POST['name'];
+$pass=$_POST['pass'];
+$fname=$_POST['fname'];
+$ic=$_POST['ic'];
+$tel=$_POST['tel'];
+$submit=$_POST['submit'];
 if($submit)
 {
-	if($username && $pass && $id && $Fname && $Email && $address && $ic && $tel)
+	if($name && $pass && $fname && $ic && $tel)
 	{
-		$insert = mysql_query ("INSERT INTO users (id, username, pass, Fullname, I/C_Number, Phone_no, Email, Address) VALUES ('$username','$pass','$Fname','$ic','$tel','$Email', '$address')");
-		echo "You have a new data..";
+		mysql_query ("INSERT INTO users (username, pass, Fname, I/C_Number, Phone_no) VALUES ('','" .$name. "','" .$pass. "','" .$fname. "','" .$ic. "','" .$tel. "')")or die ("Error inserting data into table");
+echo "Data Inserted!";
+//Closes specified connection
+mysql_close($conn);
 	}
 	else{
 		echo "Please fill out the fields";
@@ -31,74 +30,56 @@ if($submit)
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Manage User</title>
+<title>comment Box</title>
 
 </head>
 
 <body>
+<form action="Admin_manage user.php" method="POST">
 
-<h1 align="center"><b><i>User Profile</i></b></h1>
-
-<center><form action="Admin_manage user.php" method="post">
-
-<table align="center">
+<table>
 <tr>
-<td>ID Number</td>
+<td>username</td>
 <td>:</td>
-<td><input name="id" type="text"></td>
-</tr>
-
-<tr>
-<td>Username</td>
-<td>:</td>
-<td><input name="name" type="text"></td>
+<td><input type="text" name="name" />
+</td>
 </tr>
 
 <tr>
 <td>Password</td>
 <td>:</td>
-<td><input type="text" name="password"></td>
+<td>
+<input type="text" name="pass" />
+<td>
 </tr>
 
 <tr>
 <td>Full Name</td>
 <td>:</td>
-<td><input type="text" name="fname"></td>
+<td>
+<input type="text" name="fname" />
+<td>
 </tr>
 
 <tr>
-<td>ic number</td>
+<td>I/C Number</td>
 <td>:</td>
-<td><input name="ic" type="text"></td>
+<td>
+<input type="text" name="ic" />
+<td>
 </tr>
 
 <tr>
 <td>Phone Number</td>
 <td>:</td>
-<td><input type="text" name="phone"></td>
+<td>
+<input type="text" name="tel" />
+<td>
 </tr>
 
-<tr>
-<td>E-mail</td>
-<td>:</td>
-<td><input name="email" type="text"></td>
-</tr>
-
-<tr>
-<td>Address</td>
-<td>:</td>
-<td><input type="text" name="address"></td>
-</tr>
+<tr><td colspan="2"><input type="submit" name="submit" value="comment" /></td></tr>
 </table>
-
-
-
-<input type="submit" value="submit" name="submit">
-<input type="reset" value="Reset" name="reset">
 </form>
-</center>
-
-<a href="../Admin_User Account.php">Back</a>
 
 </body>
 </html>

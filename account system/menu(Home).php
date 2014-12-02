@@ -16,47 +16,59 @@
 
 <body bgcolor="#CCCCCC">
 
+<center><img src="tuffahlogo.png"></center>
 
-<img src="tuffahlogo.png">
+<form action="">
+<table align="center">
 
-<div id="container">
-  
-  <div id="Header"><h1><b>Tuffah Account Management System</b></h1>
-</div>
+<tr>
+<td align="center">Jenis Bank</td>
+</tr>
+<tr>
+<td><select name="jenis_bank">
+<option></option>
+<option>Bank Islam</option>
+<option>Maybank</option>
+<option>AgroBank</option>
+<option>Bank Rakyat</option>
+<option>Tabung Haji</option>
+<option>CIMBank</option>
+<option>Bank Simpanan Berhad(BSN)</option>
+</select>
+</td><br />
+</tr>
 
-<div align="center"><h3 id="Header"><small></small></h3></div>
+<tr>
+<td align="center"><input type="text" name="No.akaun" placeholder="Number Akaun"></td><br />
+</tr>
 
-<div align="center" id="Nav">
+<tr>
+<td align="center"><input type="text" name="perkara" placeholder="Perkara"></td>
+</tr>
 
-<nav align="center">
-<ul>
-	<li><a href="menu(Home).php">Home</a></li>
-    <li><a href="Menu_Account.php">Account</a></li>
-    <li><a href="Menu_Current_TransactionPage.php">Current Transaction</a></li>
-    <li><a href="login.php">Log Out</a></li>
-</ul>
-</nav>
+<tr>
+<td align="center">Jenis Pembayaran :</td>
+</tr>
+<tr>
+<td align="center"><select name="Jenis_bayaran">
+<option></option>
+<option>Debit</option>
+<option>Kredit</option>
+</select>
+</td>
+</tr>
 
-<div id="content"></div>
-</div>
+<tr>
+<td align="center"><input type="date" name="date" placeholder="Tarikh" align="middle"></td>
+</tr>
 
-<fieldset>
+<tr>
+<td align="center"><input type="time" name="time" placeholder="Masa" align="middle"></td>
+</tr>
 
+</table>
 
-
-
-
-
-
-
-
-
-
-
-</fieldset>
-
-</div>
-
+</form>
 
 
 </body>

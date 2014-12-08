@@ -5,7 +5,7 @@ $dbuser ="root";
 $dbpass = "";
 $conn = mysql_connect($dbhost, $dbuser, $dbpass)
 or die ("Error connecting to MySQL");
-$db = "sistem akaun";
+$db = "sistem_akaun";
 mysql_select_db($db) or
 die ("Error connecting to Database: ".$dbname);
 
@@ -19,7 +19,11 @@ if (isset($_POST['username'])){
 		$_SESSION['auth']=true;
 		header ("Location: Admin Account.php");
 		exit();
-	}}
+	}
+}
+	
+	
+	
 if (isset($_POST['username'])){
 	$username = $_POST['username'];
 	$password = $_POST['password'];
@@ -28,12 +32,12 @@ if (isset($_POST['username'])){
 	if (mysql_num_rows($res) > 0)
 	{
 		$_SESSION['auth']=true;
-		header ("Location: menu(Home).php");
+		header ("Location: index.php");
 		exit();
 	}
 	else{
 		echo "invalid login";
-		echo "Your password or you username is wrong!";
+		echo "Your password or your username is wrong!";
 		header ("Location: login.php");
 		exit();
 	}
@@ -41,7 +45,7 @@ if (isset($_POST['username'])){
 
 	
 ?>
-    <link rel="stylesheet" href="login_css.css" />
+    <link rel="stylesheet" href="css/login_css.css" />
 <body bgcolor="#003333">
 <center>
 <fieldset>

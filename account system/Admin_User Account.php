@@ -11,7 +11,7 @@
 
 <form action="Admin Manage User/index.php" method="post">
 <input type="search" name="first user" placeholder="First user">
-<input type="submit" name="View" value="view">
+<input type="submit" name="add" value="insert/add user">
 <input type="reset" name="Remove" value="remove user">
 </form>
 

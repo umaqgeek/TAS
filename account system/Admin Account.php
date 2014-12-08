@@ -9,7 +9,7 @@
 
 <body>
 
-<h1 align="center"><i><b>WELCOME</b></i></h1>
+
 
 <ol>
 <li><a href="Admin_User Account.php">Manage User</a></li>

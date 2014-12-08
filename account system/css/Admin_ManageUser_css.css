@@ -1,0 +1,15 @@
+body{
+	margin:0;
+	padding:0;
+	color:#333;
+}
+
+
+.table{
+	margin:auto;
+	padding:33px;
+	background:#CCC;
+	border-color:#666;
+	border-radius:33px;
+	width:333px;
+}

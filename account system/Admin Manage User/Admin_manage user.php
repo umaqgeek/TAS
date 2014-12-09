@@ -32,9 +32,14 @@ $retval = mysql_query($sql, $conn);
 
 	else{
 		echo "insert your detail to all form";
+		$_SESSION['auth']=true;
+		header ("Location: index.php");
+		exit();
 	}
 }
 ?>
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -44,14 +49,15 @@ $retval = mysql_query($sql, $conn);
 <link rel="stylesheet" href="../css/Admin_ManageUser_css.css" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>comment Box</title>
+<title>cornfirm</title>
 
 </head>
 
 <body>
+
 <form action="Admin_manage user.php" method="POST" class="table">
 
-<table>
+<table align="center">
 
 <tr>
 <td>username</td>
@@ -106,18 +112,43 @@ $retval = mysql_query($sql, $conn);
 <td>:</td>
 <td>
 <textarea name="address"></textarea>
-</td>
-</tr>
+</td></tr>
 
 
 <tr>
 <td colspan="3" align="left">
-<input type="submit" name="submit" value="comment" />
+<input type="submit" name="submit" value="Submit" />
 </td>
 </tr>
 </table>
 
 </form>
+
+<table border"5px" bordercolor="#000000" width="750px" align="center">
+<?php
+
+$result=mysql_query("select * from users");
+while($rows=mysql_fetch_array($result))
+{
+	$user=$rows['username'];
+		
+	echo'<tr align="center">';
+	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['id'].'<td>';
+	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['username'].'<td>';
+	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['pass'].'<td>';
+	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['Fname'].'<td>';
+	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['ic'].'<td>';
+	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['tel'].'<td>';
+	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['email'].'<td>';
+	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['address'].'<td>';
+	
+	echo'<td><a href="#?username='.$user.'">Edit</a></td>';
+	echo'<td><a href="delete.php?username='.$user.'">Delete</a></td>';
+	echo'</tr>';
+}
+
+?>
+</table>
 
 </body>
 </html>

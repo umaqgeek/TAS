@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="../css/Admin_ManageUser_css.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>comment Box</title>
+<title>index register</title>
 </head>
 
 <body>

@@ -1,6 +1,5 @@
 <?php
-
-
+error_reporting(0);
 require("connect_manageUser.php");
 $name=$_POST['name'];
 $pass=$_POST['pass'];
@@ -40,7 +39,6 @@ $retval = mysql_query($sql, $conn);
 ?>
 
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -55,7 +53,7 @@ $retval = mysql_query($sql, $conn);
 
 <body>
 
-<form action="Admin_manage user.php" method="POST" class="table">
+<form action="" method="POST" class="table">
 
 <table align="center">
 
@@ -133,14 +131,14 @@ while($rows=mysql_fetch_array($result))
 	$user=$rows['username'];
 		
 	echo'<tr align="center">';
-	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['id'].'<td>';
-	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['username'].'<td>';
-	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['pass'].'<td>';
-	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['Fname'].'<td>';
-	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['ic'].'<td>';
-	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['tel'].'<td>';
-	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['email'].'<td>';
-	echo'<td width="100" align="center" bordercolor="#000000">'.$rows['address'].'<td>';
+	echo'<td width="100" align="center">'.$rows['id'].'<td>';
+	echo'<td width="100" align="center">'.$rows['username'].'<td>';
+	echo'<td width="100" align="center">'.$rows['pass'].'<td>';
+	echo'<td width="100" align="center">'.$rows['Fname'].'<td>';
+	echo'<td width="100" align="center">'.$rows['ic'].'<td>';
+	echo'<td width="100" align="center">'.$rows['tel'].'<td>';
+	echo'<td width="100" align="center">'.$rows['email'].'<td>';
+	echo'<td width="100" align="center">'.$rows['address'].'<td>';
 	
 	echo'<td><a href="#?username='.$user.'">Edit</a></td>';
 	echo'<td><a href="delete.php?username='.$user.'">Delete</a></td>';

@@ -32,7 +32,7 @@ if (isset($_POST['username'])){
 	if (mysql_num_rows($res) > 0)
 	{
 		$_SESSION['auth']=true;
-		header ("Location: index.php");
+		header ("Location: index(home).php");
 		exit();
 	}
 	else{

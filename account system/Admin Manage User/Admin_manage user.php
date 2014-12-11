@@ -109,7 +109,7 @@ $retval = mysql_query($sql, $conn);
 <td>Address</td>
 <td>:</td>
 <td>
-<textarea name="address"></textarea>
+<input type="text" name="address">
 </td></tr>
 
 
@@ -140,7 +140,7 @@ while($rows=mysql_fetch_array($result))
 	echo'<td width="100" align="center">'.$rows['email'].'<td>';
 	echo'<td width="100" align="center">'.$rows['address'].'<td>';
 	
-	echo'<td><a href="#?username='.$user.'">Edit</a></td>';
+	echo'<td><a href="update.php?username='.$user.'">Edit</a></td>';
 	echo'<td><a href="delete.php?username='.$user.'">Delete</a></td>';
 	echo'</tr>';
 }

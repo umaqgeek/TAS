@@ -70,9 +70,15 @@
 
 
 <tr>
-<td colspan="3" align="left">
+<td colspan="2" align="left">
 <input type="submit" name="submit" value="Submit" />
 </td>
+<td align="center"><a href="Admin_manage user.php">View</a></td>
+</tr>
+
+<tr>
+<td colspan="3" align="left">
+<a href="../Admin Account.php"><b>Back</b></a></td>
 </tr>
 </table>
 

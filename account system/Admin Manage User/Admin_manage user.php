@@ -115,8 +115,12 @@ $retval = mysql_query($sql, $conn);
 
 <tr>
 <td colspan="3" align="left">
-<input type="submit" name="submit" value="Submit" />
+<input type="submit" name="submit" value="Add" />
 </td>
+</tr>
+<tr>
+<td colspan="3" align="left">
+<a href="../Admin Account.php"><b>Back</b></a></td>
 </tr>
 </table>
 

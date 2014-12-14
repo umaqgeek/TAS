@@ -126,7 +126,20 @@ $retval = mysql_query($sql, $conn);
 
 </form>
 
-<table border"5px" bordercolor="#000000" width="750px" align="center">
+<table border="1" bordercolor="#000000" width="750px" align="center">
+<tr>
+	<td align="center"><b>id</b></td>
+	<td align="center"><b>Username</b></td>
+	<td align="center"><b>Password</b></td>
+	<td align="center"><b>Fullname</b></td>
+	<td align="center"><b>I/C Number</b></td>
+	<td align="center"><b>Phone Number</b></td>
+	<td align="center"><b>Email</b></td>
+	<td align="center"><b>Address</b></td>
+    <td colspan="2"></td>
+	</tr>
+  
+
 <?php
 
 $result=mysql_query("select * from users");
@@ -134,15 +147,16 @@ while($rows=mysql_fetch_array($result))
 {
 	$user=$rows['username'];
 		
+		
 	echo'<tr align="center">';
-	echo'<td width="100" align="center">'.$rows['id'].'<td>';
-	echo'<td width="100" align="center">'.$rows['username'].'<td>';
-	echo'<td width="100" align="center">'.$rows['pass'].'<td>';
-	echo'<td width="100" align="center">'.$rows['Fname'].'<td>';
-	echo'<td width="100" align="center">'.$rows['ic'].'<td>';
-	echo'<td width="100" align="center">'.$rows['tel'].'<td>';
-	echo'<td width="100" align="center">'.$rows['email'].'<td>';
-	echo'<td width="100" align="center">'.$rows['address'].'<td>';
+	echo'<td width="100" align="center">'.$rows['id'].'</td>';
+	echo'<td width="100" align="center">'.$rows['username'].'</td>';
+	echo'<td width="100" align="center">'.$rows['pass'].'</td>';
+	echo'<td width="100" align="center">'.$rows['Fname'].'</td>';
+	echo'<td width="100" align="center">'.$rows['ic'].'</td>';
+	echo'<td width="100" align="center">'.$rows['tel'].'</td>';
+	echo'<td width="100" align="center">'.$rows['email'].'</td>';
+	echo'<td width="100" align="center">'.$rows['address'].'</td>';
 	
 	echo'<td><a href="update.php?username='.$user.'">Edit</a></td>';
 	echo'<td><a href="delete.php?username='.$user.'">Delete</a></td>';
@@ -151,6 +165,8 @@ while($rows=mysql_fetch_array($result))
 
 ?>
 </table>
+
+
 
 </body>
 </html>

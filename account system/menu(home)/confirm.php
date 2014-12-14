@@ -1,27 +1,22 @@
 <?php
-$dbuser="root";
-$dbpass="";
-$dbhost="localhost";
-$conn = mysql_connect($dbhost,$dbuser,$dbpass);
 
-if(! $conn)
-{
-	die('could not connect: '. mysql_error());
-}
+error_reporting(0);
 require ("connect.php");
+$name=$_POST['name'];
 $Jbank=$_POST['Jbank'];
 $Nakaun=$_POST['Nakaun'];
 $perkara=$_POST['perkara'];
 $Jbayaran=$_POST['Jbayaran'];
 $date=$_POST['date'];
 $time=$_POST['time'];
+
 $submit=$_POST['send'];
 
 if($submit)
 {
-	if($Jbank && $Nakaun && $perkara && $Jbayaran && $date && $time)
+	if ($name && $Jbank && $Nakaun && $perkara && $Jbayaran && $date && $time)
 	{
-		$sql = "INSERT INTO account (Jamaun, perkara, tarikh, masa, Jbank, Nbank) VALUES ('$Jbayaran','$perkara','$date','$time','$Jbank','$Nakaun')";
+		$sql = "INSERT INTO account (name, Jamaun, perkara, tarikh, masa, Jbank, Nbank) VALUES ('$name','$Jbayaran','$perkara','$date','$time','$Jbank','$Nakaun')";
 		
 		mysql_select_db('sistem_akaun');
 		$retval =  mysql_query($sql, $conn);
@@ -33,6 +28,12 @@ if($submit)
 		{
 			die('could not get data : '. mysql_error());;
 		}
+	}
+	else{
+		echo "insert your detail to all form";
+		$_SESSION['auth']=true;
+		header ("Location: index(home).php");
+		exit();
 	}
 }
 
@@ -54,35 +55,32 @@ if($submit)
 
 <center><img src="../tuffahlogo.png" id="img"></center>
 
-<form action="confirm.php" method="POST">
+<form action="" method="POST">
 <table align="center">
+
+<tr>
+<td align="center">
+<input type="text" name="name" value="<?php echo $_POST['name']; ?>" />
+</td>
+</tr>
 
 <tr>
 <td align="center">Jenis Bank</td>
 </tr>
 <tr>
-<td><select name="Jbank" id="select">
-<option></option>
-<option>Bank Islam</option>
-<option>Maybank</option>
-<option>AgroBank</option>
-<option>Bank Rakyat</option>
-<option>Tabung Haji</option>
-<option>CIMBank</option>
-<option>Bank Simpanan Berhad(BSN)</option>
-</select>
+<td><input type="text" name="Jbank" value="<?php echo $_POST['Jbank']; ?>"
 </td><br />
 </tr>
 
 <tr>
 <td align="center">
-<input type="text" name="Nakaun" placeholder="Number Akaun">
+<input type="text" name="Nakaun" value="<?php echo $_POST['Nakaun']; ?>">
 </td><br />
 </tr>
 
 <tr>
 <td align="center">
-<input type="text" name="perkara" placeholder="Perkara">
+<input type="text" name="perkara" value="<?php echo $_POST['perkara']; ?>">
 </td>
 </tr>
 
@@ -91,11 +89,7 @@ if($submit)
 </tr>
 <tr>
 <td align="center">
-<select name="Jbayaran" id="select">
-<option></option>
-<option>Debit</option>
-<option>Kredit</option>
-</select>
+<input type="text" name="Jbayaran" value="<?php echo $_POST['Jbayaran']; ?>"
 </td>
 </tr>
 
@@ -104,7 +98,7 @@ if($submit)
 </tr>
 <tr>
 <td align="center">
-<input type="date" id="select" name="date" placeholder="Tarikh" align="middle">
+<input type="date" id="select" name="date" value="<?php echo $_POST['date']; ?>">
 </td>
 </tr>
 
@@ -113,7 +107,7 @@ if($submit)
 </tr>
 <tr>
 <td align="center">
-<input type="time" name="time" id="select" placeholder="Masa" align="middle">
+<input type="time" name="time" id="select" value="<?php echo $_POST['time']; ?>">
 </td>
 </tr>
 
@@ -124,6 +118,16 @@ if($submit)
 </tr>
 </table>
 
+
+
+
+
+
+
+
 </form>
 </body>
 </html>
+
+
+

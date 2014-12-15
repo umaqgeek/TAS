@@ -36,6 +36,26 @@ $retval = mysql_query($sql, $conn);
 		exit();
 	}
 }
+
+?>
+
+<?php
+
+$pass=$_POST['pass'];
+if($submit)
+
+foreach ($pass as $input){
+	if ( strlen ($input) > 16){
+		echo "input: password is too long!!!";
+	}
+	if ( !preg_match ("#[a-z]+#", $input )){
+		echo "$input : Password must include at least one Lowercase!";
+	}
+	if ( !preg_match ("#[0-9]+#", $input)){
+		echo "input: password must include the number";
+	}
+}
+
 ?>
 
 
@@ -143,13 +163,14 @@ $retval = mysql_query($sql, $conn);
 <?php
 
 $result=mysql_query("select * from users");
+$i = 1;
 while($rows=mysql_fetch_array($result))
 {
 	$user=$rows['username'];
 		
 		
 	echo'<tr align="center">';
-	echo'<td width="100" align="center">'.$rows['id'].'</td>';
+	echo'<td width="100" align="center">'.$i.'</td>';
 	echo'<td width="100" align="center">'.$rows['username'].'</td>';
 	echo'<td width="100" align="center">'.$rows['pass'].'</td>';
 	echo'<td width="100" align="center">'.$rows['Fname'].'</td>';
@@ -161,7 +182,10 @@ while($rows=mysql_fetch_array($result))
 	echo'<td><a href="update.php?username='.$user.'">Edit</a></td>';
 	echo'<td><a href="delete.php?username='.$user.'">Delete</a></td>';
 	echo'</tr>';
+	
+	$i++;
 }
+
 
 ?>
 </table>

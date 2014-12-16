@@ -9,15 +9,35 @@ $tel=$_POST['tel'];
 $email=$_POST['email'];
 $address=$_POST['address'];
 $submit=$_POST['submit'];
+
+
+
 if($submit)
 {
-	if($name && $pass && $fname && $ic && $tel && $email && $address)
+	if(isset($_POST["pass"]))
+	{
+			$pass = $_POST["pass"];
+			include_once("strongpass.php");
+			$strongpass = new strongpass();
+			$response = $strongpass->check($pass);
+			
+			if($response !="OK"){
+				$status = $response;
+				echo "<b>Check your password</b>";
+				$_SESSION['auth']=true;
+				header ("Location: Admin_manage user.php");
+				exit();
+				}
+	}
+	
+	if ($name && $pass && $fname && $ic && $tel && $email && $address)
 	{
 		$sql = "INSERT INTO users 
 		(username, pass, Fname, ic, tel, email, address) 
 		VALUES ('$name','$pass','$fname','$ic','$tel','$email','$address')";
 
-$retval = mysql_query($sql, $conn);
+		
+		$retval = mysql_query($sql, $conn);
 	
 		if ($retval)
 		{
@@ -28,34 +48,15 @@ $retval = mysql_query($sql, $conn);
 		die('could not get data : '. mysql_error());;
 		}
 	}
-
+	
 	else{
-		echo "insert your detail to all form";
+		echo "<b>insert your detail to all form</b>";
 		$_SESSION['auth']=true;
 		header ("Location: index.php");
 		exit();
 	}
+
 }
-
-?>
-
-<?php
-
-$pass=$_POST['pass'];
-if($submit)
-
-foreach ($pass as $input){
-	if ( strlen ($input) > 16){
-		echo "input: password is too long!!!";
-	}
-	if ( !preg_match ("#[a-z]+#", $input )){
-		echo "$input : Password must include at least one Lowercase!";
-	}
-	if ( !preg_match ("#[0-9]+#", $input)){
-		echo "input: password must include the number";
-	}
-}
-
 ?>
 
 
@@ -73,78 +74,7 @@ foreach ($pass as $input){
 
 <body>
 
-<form action="" method="POST" class="table">
 
-<table align="center">
-
-<tr>
-<td>username</td>
-<td>:</td>
-<td>
-<input type="text" name="name" />
-</td>
-</tr>
-
-<tr>
-<td>Password</td>
-<td>:</td>
-<td>
-<input type="text" name="pass" />
-</td>
-</tr>
-
-<tr>
-<td>Full Name</td>
-<td>:</td>
-<td>
-<input type="text" name="fname" />
-</td>
-</tr>
-
-<tr>
-<td>I/C Number</td>
-<td>:</td>
-<td>
-<input type="text" name="ic" />
-</td>
-</tr>
-
-<tr>
-<td>Phone Number</td>
-<td>:</td>
-<td>
-<input type="text" name="tel" />
-</td>
-</tr>
-
-<tr>
-<td>E-mail</td>
-<td>:</td>
-<td>
-<input type="text" name="email" />
-</td>
-</tr>
-
-<tr>
-<td>Address</td>
-<td>:</td>
-<td>
-<input type="text" name="address">
-</td></tr>
-
-
-<tr>
-<td colspan="3" align="left">
-<input type="submit" name="submit" value="Add" />
-</td>
-</tr>
-<tr>
-<td colspan="3" align="left">
-<a href="../Admin Account.php"><b>Back</b></a></td>
-</tr>
-</table>
-
-</form>
 
 <table border="1" bordercolor="#000000" width="750px" align="center">
 <tr>

@@ -65,10 +65,19 @@ if($submit)
 </tr>
 
 <tr>
-<td align="center">Jenis Bank</td>
+<td align="center"><b>Jenis Bank</b></td>
 </tr>
 <tr>
-<td><input type="text" name="Jbank" value="<?php echo $_POST['Jbank']; ?>"
+<td><select name="Jbank" id="select">
+<option><?php echo $_POST['Jbank']; ?></option>
+<option>Bank Islam</option>
+<option>Maybank</option>
+<option>AgroBank</option>
+<option>Bank Rakyat</option>
+<option>Tabung Haji</option>
+<option>CIMBank</option>
+<option>Bank Simpanan Berhad(BSN)</option>
+</select>
 </td><br />
 </tr>
 
@@ -85,11 +94,15 @@ if($submit)
 </tr>
 
 <tr>
-<td align="center">Jenis Pembayaran :</td>
+<td align="center"><b>Jenis Pembayaran :</b></td>
 </tr>
 <tr>
 <td align="center">
-<input type="text" name="Jbayaran" value="<?php echo $_POST['Jbayaran']; ?>"
+<select name="Jbayaran" id="select">
+<option><?php echo $_POST['Jbayaran']; ?></option>
+<option>Debit</option>
+<option>Kredit</option>
+</select>
 </td>
 </tr>
 
@@ -116,6 +129,10 @@ if($submit)
 <input type="submit" name="send" value="Send">
 </td>
 </tr>
+
+
+
+
 </table>
 
 

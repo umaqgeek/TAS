@@ -1,64 +1,3 @@
-<?php
-error_reporting(0);
-require("connect_manageUser.php");
-$name=$_POST['name'];
-$pass=$_POST['pass'];
-$fname=$_POST['fname'];
-$ic=$_POST['ic'];
-$tel=$_POST['tel'];
-$email=$_POST['email'];
-$address=$_POST['address'];
-$submit=$_POST['submit'];
-
-
-
-if($submit)
-{
-	if(isset($_POST["pass"]))
-	{
-			$pass = $_POST["pass"];
-			include_once("strongpass.php");
-			$strongpass = new strongpass();
-			$response = $strongpass->check($pass);
-			
-			if($response !="OK"){
-				$status = $response;
-				echo "<b>Check your password</b>";
-				$_SESSION['auth']=true;
-				header ("Location: Admin_manage user.php");
-				exit();
-				}
-	}
-	
-	if ($name && $pass && $fname && $ic && $tel && $email && $address)
-	{
-		$sql = "INSERT INTO users 
-		(username, pass, Fname, ic, tel, email, address) 
-		VALUES ('$name','$pass','$fname','$ic','$tel','$email','$address')";
-
-		
-		$retval = mysql_query($sql, $conn);
-	
-		if ($retval)
-		{
-		echo "<b>SUCCESS!!!</b>";
-		}
-		else
-		{
-		die('could not get data : '. mysql_error());;
-		}
-	}
-	
-	else{
-		echo "<b>insert your detail to all form</b>";
-		$_SESSION['auth']=true;
-		header ("Location: index.php");
-		exit();
-	}
-
-}
-?>
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -91,7 +30,8 @@ if($submit)
   
 
 <?php
-
+error_reporting(0);
+require("connect_manageUser.php");
 $result=mysql_query("select * from users");
 $i = 1;
 while($rows=mysql_fetch_array($result))
@@ -120,7 +60,9 @@ while($rows=mysql_fetch_array($result))
 ?>
 </table>
 
-
+<center>
+<a href="index.php"><input type="button" value="Add" /></a>
+</center>
 
 </body>
 </html>

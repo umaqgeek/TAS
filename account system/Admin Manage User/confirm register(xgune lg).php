@@ -35,9 +35,19 @@ if($submit)
 			else
 			{
 				echo "Password strong!!!";
-				$_SESSION['auth']=true;
-				header ("Location: Admin_manage user.php");
-				exit();
+				$sql = "INSERT INTO users 
+						(username, pass, Fname, ic, tel, email, address) 
+						VALUES ('$name','$pass','$fname','$ic','$tel','$email','$address')";
+
+						$retval = mysql_query($sql, $conn);
+	
+						if ($retval)
+						{
+						echo "<b>SUCCESS!!!</b>";
+							$_SESSION['auth']=true;
+							header ("Location: Admin_manage user.php");
+							exit();
+						}
 			}
 			$strongpass = new strongpass();
 		}

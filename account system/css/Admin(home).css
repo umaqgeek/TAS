@@ -1,0 +1,29 @@
+.body{
+	padding:0px;
+	margin:0px;
+}
+
+.table{
+	background:#999;
+	border-radius:15px;
+	margin:auto;
+	padding:15px;
+}
+.table td{
+	background-color:#999;
+	border-radius:5px;
+	border:none;
+	size:auto;
+}
+
+#td{
+	background:#999;
+	border:none;
+}
+
+#input{
+	width:155px;
+	height:35px;
+	background-color:#FFF;
+}
+

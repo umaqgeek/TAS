@@ -13,7 +13,7 @@
 
 <ol>
 <li><a href="Admin_User Account.php">Manage User</a></li>
-<li><a href="Admin_manage interface.php">Manage Interface</a></li>
+<li><a href="Admin_home.php">Check account report</a></li>
 </ol>
 
 </body>

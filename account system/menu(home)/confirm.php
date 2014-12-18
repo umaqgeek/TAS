@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 error_reporting(0);
 require ("connect.php");
 $name=$_POST['name'];
@@ -10,23 +10,37 @@ $Jbayaran=$_POST['Jbayaran'];
 $date=$_POST['date'];
 $time=$_POST['time'];
 
+$i=$_SESSION['username'];
+$y= 'hello';
+echo "<h1 align='center'>$y $i</h1>";
+
 $submit=$_POST['send'];
 
 if($submit)
 {
 	if ($name && $Jbank && $Nakaun && $perkara && $Jbayaran && $date && $time)
 	{
-		$sql = "INSERT INTO account (name, Jamaun, perkara, tarikh, masa, Jbank, Nbank) VALUES ('$name','$Jbayaran','$perkara','$date','$time','$Jbank','$Nakaun')";
-		
-		mysql_select_db('sistem_akaun');
-		$retval =  mysql_query($sql, $conn);
-		if ($retval)
+		if($_POST["name"] != $i)
 		{
-			echo "<b>SUCCESS!!!</b>";
+			echo "Sorry, sender must be own of this account\n\n";
 		}
 		else
-		{
-			die('could not get data : '. mysql_error());;
+	{
+				$sql = "INSERT INTO account (name, Jamaun, perkara, tarikh, masa, Jbank, Nbank)
+				VALUES('$name','$Jbayaran','$perkara','$date','$time','$Jbank','$Nakaun')";
+			
+				mysql_select_db('sistem_akaun');
+				$retval =  mysql_query($sql, $conn);
+				if ($retval)
+				{
+					echo "<b>SUCCESS!!!</b><br/>";
+					echo "Your form is sent!!!";
+				}
+				else
+				{
+					die('could not get data : '. mysql_error());;
+				}
+
 		}
 	}
 	else{
@@ -36,6 +50,7 @@ if($submit)
 		exit();
 	}
 }
+
 
 ?>
 
@@ -60,7 +75,7 @@ if($submit)
 
 <tr>
 <td align="center">
-<input type="text" name="name" value="<?php echo $_POST['name']; ?>" />
+<input type="text" placeholder="Username" name="name" value="<?php echo $_POST['name']; ?>" />
 </td>
 </tr>
 
@@ -83,13 +98,13 @@ if($submit)
 
 <tr>
 <td align="center">
-<input type="text" name="Nakaun" value="<?php echo $_POST['Nakaun']; ?>">
+<input type="text" placeholder="Number Akaun" name="Nakaun" value="<?php echo $_POST['Nakaun']; ?>">
 </td><br />
 </tr>
 
 <tr>
 <td align="center">
-<input type="text" name="perkara" value="<?php echo $_POST['perkara']; ?>">
+<input type="text" placeholder="Perkara" name="perkara" value="<?php echo $_POST['perkara']; ?>">
 </td>
 </tr>
 
@@ -111,7 +126,7 @@ if($submit)
 </tr>
 <tr>
 <td align="center">
-<input type="date" id="select" name="date" value="<?php echo $_POST['date']; ?>">
+<input type="date" placeholder="Tarikh" id="select" name="date" value="<?php echo $_POST['date']; ?>">
 </td>
 </tr>
 
@@ -120,7 +135,7 @@ if($submit)
 </tr>
 <tr>
 <td align="center">
-<input type="time" name="time" id="select" value="<?php echo $_POST['time']; ?>">
+<input type="time" placeholder="Masa" name="time" id="select" value="<?php echo $_POST['time']; ?>">
 </td>
 </tr>
 

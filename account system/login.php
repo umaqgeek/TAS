@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $dbhost = "localhost";
 $dbuser ="root";
 $dbpass = "";
@@ -32,6 +32,7 @@ if (isset($_POST['username'])){
 	if (mysql_num_rows($res) > 0)
 	{
 		$_SESSION['auth']=true;
+		$_SESSION['username']= $_POST['username'];
 		header ("Location: menu(home)/index(home).php");
 		exit();
 	}

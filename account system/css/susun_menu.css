@@ -1,0 +1,42 @@
+nav ul{
+	margin:0;
+	padding:0;
+}
+
+nav ul li{
+	list-style:none;
+	float:left;
+	display:block;
+	width:111px;
+	height:60px;
+	text-align:center;
+	line-height:33px;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:15px;
+}
+
+nav ul li a{
+	text-decoration:none;
+	color:#666;
+}
+
+nav ul li:hover{
+	background-color:#999;
+}
+
+nav ul li:hover a{
+	display:block;
+	color:#333;
+}
+
+#top{
+	alignment-adjust:central;
+	grid-rows:none;
+	top:inherit;
+}
+
+#bottom{
+	alignment-adjust:central;
+	bottom:inherit;
+	display:table-row;
+}

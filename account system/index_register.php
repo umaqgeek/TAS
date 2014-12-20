@@ -2,20 +2,26 @@
 session_start();
 error_reporting(0);
 require("connect.php");
-$result=mysql_query("select * from account");
-$i = 1;
+
 
 $i=$_SESSION['username'];
 $y= 'hello';
 echo "<h2 align='center'>$y $i</h2>";
+
+if(isset($_GET['logout']) && $_GET['logout'] == "true"){
+	session_destroy();
+	echo "<br/>Successfully logged out.";
+	header ("Location: login.php");
+	exit();
+}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<link rel="stylesheet" type="text/css" href="../css/lay_menu.css" />
-<link rel="stylesheet" type="text/css" href="../css/susun_menu.css" />
+<link rel="stylesheet" type="text/css" href="../TAS/account system/css/lay_menu.css" />
+<link rel="stylesheet" type="text/css" href="../TAS/account system/css/susun_menu.css" />
 <link rel="stylesheet" href="../css/Admin_ManageUser_css.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>index register</title>
@@ -29,22 +35,26 @@ echo "<h2 align='center'>$y $i</h2>";
 
 <div id="container">
 
-<div id="Header"><h1><b>Tuffah Account Management System</b></h1>
+<div id="Header">
+<h1><b>Tuffah Account Management System</b></h1>
 </div>
 
 <div id="Nav">
 
 <nav>
 <ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">User Account</a></li>
-<li><a href="#">View Report</a></li>
-<li><a href='?logout=true'>Logout</a></li>
-</ul>
+<li><a href="Admin Account.php">Home</a></li>
+<li><a href="#">User Registration</a></li>
+<li><a href="register.php">User Account</a></li>
+<li><a href="Admin_home.php">Report</a></li>
+<li><a href='?logout=true'>Logout</a></li></ul>
 </nav>
 </div><!--Nav-->
 
-<form action="confirm register(xgune lg).php" method="POST" class="table">
+
+<br  /><br  /><br  /><br  /><br  />
+<fieldset>
+<form action="confirm dulu@register.php" method="POST" class="table">
 
 <table align="center">
 
@@ -108,18 +118,14 @@ echo "<h2 align='center'>$y $i</h2>";
 <td colspan="2" align="left">
 <input type="submit" name="submit" value="Submit" />
 </td>
-<td align="center"><a href="Admin_manage user.php">View</a></td>
-</tr>
+<td align="center"><a href="register.php">View</a></td>
 
-<tr>
-<td colspan="3" align="left">
-<a href="../Admin Account.php"><b>Back</b></a></td>
 </tr>
 </table>
 
 </form>
+</fieldset>
 
-
-</div>
+</div><!--Container-->
 </body>
 </html>

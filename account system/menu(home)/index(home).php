@@ -13,6 +13,15 @@ $i=$_SESSION['username'];
 $y= 'hello';
 echo "$y $i";
 
+
+if(isset($_GET['logout']) && $_GET['logout'] == "true"){
+	session_destroy();
+	echo "<br/>Successfully logged out.";
+	header ("Location: login.php");
+	exit();
+}else{
+	echo "<a href='?logout=true'>Logout</a>";
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

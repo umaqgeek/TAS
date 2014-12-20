@@ -17,6 +17,7 @@ if (isset($_POST['username'])){
 	if (mysql_num_rows($res) > 0)
 	{
 		$_SESSION['auth']=true;
+		$_SESSION['username']= $_POST['username'];
 		header ("Location: Admin Account.php");
 		exit();
 	}
@@ -33,7 +34,7 @@ if (isset($_POST['username'])){
 	{
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
-		header ("Location: menu(home)/index(home).php");
+		header ("Location: menu(home)/User_home.php");
 		exit();
 	}
 	else{

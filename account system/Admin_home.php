@@ -1,23 +1,67 @@
+<?php
+session_start();
+error_reporting(0);
+require("connect.php");
+$result=mysql_query("select * from account");
+$i = 1;
+
+$i=$_SESSION['username'];
+$y= 'hello';
+echo "<h2 align='center'>$y $i</h2>";
+
+?>
 
 <!DOCTYPE>
 <html>
 <head>
+<link rel="stylesheet" href="css/lay_menu.css">
+<link rel="stylesheet" href="css/susun_menu.css">
 <link rel="stylesheet" href="css/Admin(home).css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Home</title>
 </head>
 
-<body>
+<body bgcolor="#CCCCCC">
+
+<img src="tuffahlogo.png" />
 
 
-<a href="Admin Account.php">back</a>
 
+<div id="container">
+
+<div id="Header"><h1><b>Tuffah Account Management System</b></h1>
+</div>
+
+<div id="Nav">
+
+<nav>
+<ul>
+<li><a href="Admin Account.php">Home</a></li>
+<li><a href="index_register.php">User Registration</a></li>
+<li><a href="register.php">User Account</a></li>
+<li><a href="#">Report</a></li>
+<li><a href='?logout=true'>Logout</a></li></ul>
+</nav>
+
+
+
+</div>
+
+<br /><br /><br /><br /><br/>
+<div>
+<fieldset>
 <table align="center" border="1">
+
+
 <?php
-error_reporting(0);
-require("connect.php");
-$result=mysql_query("select * from account");
-$i = 1;
+
+if(isset($_GET['logout']) && $_GET['logout'] == "true"){
+	session_destroy();
+	echo "<br/>Successfully logged out.";
+	header ("Location: login.php");
+	exit();
+}
+
 while($rows=mysql_fetch_array($result))
 {
 	$user=$rows['id'];
@@ -88,9 +132,18 @@ while($rows=mysql_fetch_array($result))
 	echo'</tr>';
 	echo'</table><br/><br/><br/>';
 	$i++;
+	
+	echo '<hr/>';
+	echo '<br/>';
 }
 
 ?>
+<hr/>
+
 </table>
+
+</div>
+</div>
+</fieldset>
 </body>
 </html>

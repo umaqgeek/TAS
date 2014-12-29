@@ -8,11 +8,15 @@ $Jbank=$_POST['Jbank'];
 $Nakaun=$_POST['Nakaun'];
 $perkara=$_POST['perkara'];
 $Jbayaran=$_POST['Jbayaran'];
+$jumlah=$_POST['jumlah'];
 $date=$_POST['date'];
 $time=$_POST['time'];
 
 $i=$_SESSION['username'];
 $y= 'hello';
+$month = time()+60*60*24*30;
+$day = time()+60*60*24;
+$bahagi = 3/$day;
 echo "<h1 align='center'>$y $i</h1>";
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
@@ -24,7 +28,7 @@ $submit=$_POST['send'];
 
 if($submit)
 {
-	if ($name && $email && $Jbank && $Nakaun && $perkara && $Jbayaran && $date && $time)
+	if ($name && $email && $Jbank && $Nakaun && $perkara && $Jbayaran && $date && $time && $jumlah)
 	{
 		if($_POST["name"] != $i)
 		{
@@ -35,8 +39,8 @@ if($submit)
 		}
 		else
 	{
-				$sql = "INSERT INTO account (name, email, Jamaun, perkara, tarikh, masa, Jbank, Nbank)
-				VALUES('$name','$email','$Jbayaran','$perkara','$date','$time','$Jbank','$Nakaun')";
+				$sql = "INSERT INTO account (name, email, Jamaun, jumlah, perkara, tarikh, masa, Jbank, Nbank)
+				VALUES('$name','$email','$Jbayaran','$jumlah','$perkara','$date','$time','$Jbank','$Nakaun')";
 			
 				mysql_select_db('sistem_akaun');
 				$retval =  mysql_query($sql, $conn);
@@ -147,6 +151,12 @@ if($submit)
 <tr>
 <td align="center">
 <input type="text" id="type" placeholder="Number Akaun" name="Nakaun" value="<?php echo $_POST['Nakaun']; ?>" />
+</td><br />
+</tr>
+
+<tr>
+<td align="center">
+<input type="text" id="type" placeholder="Jumlah Amaun" name="jumlah" value="<?php echo $_POST['jumlah']; ?>" />
 </td><br />
 </tr>
 

@@ -10,13 +10,15 @@ $Jbayaran=$_POST['Jbayaran'];
 $date=$_POST['date'];
 $time=$_POST['time'];
 
+$month = 60*60*24*4;
+
 $i=$_SESSION['username'];
 $y= 'hello';
 echo "<h1 align='center'>$y $i</h1>";
 
 $submit=$_POST['send'];
 
-if($submit)
+if($submit <= 3/$month)
 {
 	if ($name && $Jbank && $Nakaun && $perkara && $Jbayaran && $date && $time)
 	{

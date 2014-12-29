@@ -55,6 +55,16 @@ echo "<h2 align='center'>$y $i</h2>";
 
 <?php
 
+$Jamaun = $rows['Jamaun'];
+$J_ksluruhn = $rows['jum.kseluruhan'];
+$sql= "SELECT * FROM account WHERE Jamaun ='.$Jamaun.'";
+if ($Jamaun = 'Debit' && $_POST['jumlah'] <= $J_ksluruhn){
+    $J_ksluruhn - $_POST['jumlah'];
+}
+else{
+    $_POST['Jamaun'] + $J_ksluruhn;
+}
+
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
@@ -103,6 +113,12 @@ while($rows=mysql_fetch_array($result))
 	echo'</tr>';
 	
 	echo'<tr>';
+	echo'<td><b>Jumlah amaun</b></td>';
+	echo'<td><b>:</b></td>';
+	echo'<td width="100" align="center">'.$rows['jumlah'].'</td>';
+	echo'</tr>';
+	
+	echo'<tr>';
 	echo'<td><b>No. Akaun</b></td>';
 	echo'<td><b>:</b></td>';
 	echo'<td width="100" align="center">'.$rows['Nbank'].'</td>';
@@ -129,6 +145,12 @@ while($rows=mysql_fetch_array($result))
 	echo'</tr>';
 	echo'</table>';
 	
+	echo'<tr>';
+	echo'<td><h3><b>Jumlah terkini</b></h3></td>';
+	echo'<td><b>:</b></td>';
+	echo'<td width="100" align="center">'.$rows['jum.kseluruhan'].'</td>';
+	echo'</tr>';
+	
 	echo'</tr>';
 	echo'</table><br/><br/><br/>';
 	$i++;
@@ -147,3 +169,4 @@ while($rows=mysql_fetch_array($result))
 </fieldset>
 </body>
 </html>
+ 

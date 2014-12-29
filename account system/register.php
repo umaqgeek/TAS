@@ -19,9 +19,9 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<link rel="stylesheet" href="../TAS/account system/css/lay_menu.css" />
-<link rel="stylesheet" href="../TAS/account system/css/susun_menu.css" />
-<link rel="stylesheet" href="../css/Admin_ManageUser_css.css" />
+<link rel="stylesheet" href="css/lay_menu.css" />
+<link rel="stylesheet" href="css/susun_menu.css" />
+<link rel="stylesheet" href="css/Admin_ManageUser_css.css" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>cornfirm</title>

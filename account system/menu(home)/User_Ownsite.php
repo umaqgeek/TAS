@@ -28,7 +28,8 @@ if($submit)
 	{
 		if($_POST["name"] != $i)
 		{
-			echo "Sorry, sender must be own of this account\n\n";
+			header ("Location:User_Ownsite.php");
+			exit();
 		}
 		else
 	{
@@ -51,7 +52,7 @@ if($submit)
 		}
 	}
 	else{
-		echo "insert your detail to all form";
+		/*echo "insert your detail to all form";*/
 		$_SESSION['auth']=true;
 		header ("Location: CheckForm.php");
 		exit();
@@ -80,7 +81,7 @@ if($submit)
       	<li><a href="User_home.php">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
         <li><a href="#">Profile</a></li>
-      	<li><a href=''>Log out</a></li>
+      	<li><a href='?logout=true'>Log out</a></li>
 	</ul>
 	</div>
     <br />

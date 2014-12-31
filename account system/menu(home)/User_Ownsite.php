@@ -6,6 +6,7 @@ $name=$_POST['name'];
 $email=$_POST['email'];
 $Jbank=$_POST['Jbank'];
 $Nakaun=$_POST['Nakaun'];
+$jumlah=$_POST['jumlah'];
 $perkara=$_POST['perkara'];
 $Jbayaran=$_POST['Jbayaran'];
 $date=$_POST['date'];
@@ -24,7 +25,7 @@ $submit=$_POST['send'];
 
 if($submit)
 {
-	if ($name && $email && $Jbank && $Nakaun && $perkara && $Jbayaran && $date && $time)
+	if ($name && $email && $Jbank && $Nakaun && $jumlah && $perkara && $Jbayaran && $date && $time)
 	{
 		if($_POST["name"] != $i)
 		{
@@ -33,8 +34,8 @@ if($submit)
 		}
 		else
 	{
-				$sql = "INSERT INTO account (name, email, Jamaun, perkara, tarikh, masa, Jbank, Nbank)
-				VALUES('$name','$email','$Jbayaran','$perkara','$date','$time','$Jbank','$Nakaun')";
+				$sql = "INSERT INTO account (name, email, Jamaun, jumlah, perkara, tarikh, masa, Jbank, Nbank)
+				VALUES('$name','$email','$Jbayaran','$jumlah','$perkara','$date','$time','$Jbank','$Nakaun')";
 			
 				mysql_select_db('sistem_akaun');
 				$retval =  mysql_query($sql, $conn);
@@ -157,6 +158,12 @@ if($submit)
 <tr>
 <td align="center">
 <input type="text" id="type" placeholder="Number Akaun" name="Nakaun" value="<?php echo $_POST['Nakaun']; ?>" />
+</td><br />
+</tr>
+
+<tr>
+<td align="center">
+<input type="text" id="type" placeholder="Jumlah Amaun" name="jumlah" value="<?php echo $_POST['jumlah']; ?>" />
 </td><br />
 </tr>
 

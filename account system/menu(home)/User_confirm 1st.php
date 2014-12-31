@@ -109,6 +109,12 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 </tr>
 
 <tr>
+<td align="center">
+<input type="text" id="type" placeholder="Jumlah Amaun" name="jumlah" value="<?php echo $_POST['jumlah']; ?>" />
+</td><br />
+</tr>
+
+<tr>
 <td align="center"><b>Tarikh</b></td>
 </tr>
 <tr>

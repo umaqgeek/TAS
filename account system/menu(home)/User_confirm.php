@@ -64,7 +64,22 @@ if($submit)
 
 	}
 }
+while($oldvalue=mysql_fetch_array($result))
+{
+	$oldjum = $oldvalue['jum.ksluruhan']; 
+}
+if ($update)
+{
+		$SJ = $jumlah;
+		$newJumlah = $oldjum + $SJ;
 
+	
+	mysql_query("update account set jum.ksluruhan='" .$newJumlah. "' ");
+	
+	$_SESSION['auth']=true;
+		header ("Location: FormSend.php");
+		exit();
+}
 
 ?>
 
@@ -196,26 +211,3 @@ if($submit)
 </html>
 
 
-<?php
-
-
-
-
-while($oldvalue=mysql_fetch_array($result))
-{
-	$oldjum = $oldvalue['jum.ksluruhan']; 
-}
-if ($update)
-{
-		$SJ = $_POST['jumlah'];
-		$newJumlah = $oldjum + $SJ;
-
-	
-	mysql_query("update account set jum.ksluruhan='" .$newJumlah. "' ");
-	
-	$_SESSION['auth']=true;
-		header ("Location: FormSend.php");
-		exit();
-}
-
-?>

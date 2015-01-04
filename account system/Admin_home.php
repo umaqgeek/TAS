@@ -172,3 +172,20 @@ while($rows=mysql_fetch_array($result))
 </body>
 </html>
  
+ <?php
+ 
+ $query = "SELECT Jamaun, COUNT(name), SUM(jumlah) FROM account GROUP BY Jamaun"; 
+$result = mysql_query($query) or die(mysql_error());
+
+// Print out result
+while($row = mysql_fetch_array($result)){
+	echo '<table align="right">';
+	echo '<tr>';
+	echo '<td>- There are'. $row['COUNT(name)'] ."". $row['Jamaun'] ."<br/> And ". $row['Jamaun']. " = RM". $row['SUM(jumlah)'].'</td>';
+	 echo '</tr>>';
+	echo "<br />";
+	echo '</table>';
+
+}
+ 
+ ?>

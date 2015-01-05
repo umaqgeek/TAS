@@ -9,8 +9,6 @@ $i=$_SESSION['username'];
 $y= 'hello';
 echo "<h2 align='center'>$y $i</h2>";
 
-
-
 ?>
 
 <!DOCTYPE>
@@ -57,14 +55,16 @@ echo "<h2 align='center'>$y $i</h2>";
 
 <?php
 
-$Jamaun = $rows['Jamaun'];
-$J_ksluruhn = $rows['jum.kseluruhan'];
-$sql= "SELECT * FROM account WHERE Jamaun ='.$Jamaun.'";
-if ($Jamaun = 'Debit' && $_POST['jumlah'] <= $J_ksluruhn){
-    $J_ksluruhn - $_POST['jumlah'];
+$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
+$resSum = mysql_query($sqlSum) or die(mysql_error());
+while ($row = mysql_fetch_array($resSum)){
+	$total =  $row['SUM(jumlah)'];
 }
-else{
-    $_POST['Jamaun'] + $J_ksluruhn;
+
+$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Debit'";
+$resSub = mysql_query($sqlSub) or die(mysql_error());
+while ($row = mysql_fetch_array($resSub)){
+	$deb =  $row['sum(jumlah)'];
 }
 
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
@@ -82,7 +82,6 @@ while($rows=mysql_fetch_array($result))
 	echo'<tr>';	
 	echo'<td width="100" align="center" colspan="3"><h3><b>'.$rows['semak'].'</b><h3></td>';
 	echo'</tr>';
-
 		
 	echo'<tr align="center">';
 	echo'<td><b>id</b></td>';
@@ -150,7 +149,7 @@ while($rows=mysql_fetch_array($result))
 	echo'<tr>';
 	echo'<td><h3><b>Jumlah terkini</b></h3></td>';
 	echo'<td><b>:</b></td>';
-	echo'<td width="100" align="center">'.$rows['jum.kseluruhan'].'</td>';
+	echo'<td width="100" align="center">'.$total.'</td>';
 	echo'</tr>';
 	
 	echo'</tr>';
@@ -160,6 +159,7 @@ while($rows=mysql_fetch_array($result))
 	echo '<hr/>';
 	echo '<br/>';
 }
+
 
 ?>
 <hr/>
@@ -172,20 +172,3 @@ while($rows=mysql_fetch_array($result))
 </body>
 </html>
  
- <?php
- 
- $query = "SELECT Jamaun, COUNT(name), SUM(jumlah) FROM account GROUP BY Jamaun"; 
-$result = mysql_query($query) or die(mysql_error());
-
-// Print out result
-while($row = mysql_fetch_array($result)){
-	echo '<table align="right">';
-	echo '<tr>';
-	echo '<td>- There are'. $row['COUNT(name)'] ."". $row['Jamaun'] ."<br/> And ". $row['Jamaun']. " = RM". $row['SUM(jumlah)'].'</td>';
-	 echo '</tr>>';
-	echo "<br />";
-	echo '</table>';
-
-}
- 
- ?>

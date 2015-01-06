@@ -55,7 +55,7 @@ echo "<h2 align='center'>$y $i</h2>";
 
 <?php
 
-$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
+$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
 	$total =  $row['SUM(jumlah)'];
@@ -149,7 +149,7 @@ while($rows=mysql_fetch_array($result))
 	echo'<tr>';
 	echo'<td><h3><b>Jumlah terkini</b></h3></td>';
 	echo'<td><b>:</b></td>';
-	echo'<td width="100" align="center">'.$total.'</td>';
+	echo'<td width="100" align="center">'.$total.' - '.$deb.'='.($total-$deb).'</td>';
 	echo'</tr>';
 	
 	echo'</tr>';

@@ -14,9 +14,26 @@ $time=$_POST['time'];
 
 $i=$_SESSION['username'];
 $y= 'hello';
-$month = time()+60*60*24*30;
-$day = time()+60*60*24;
-$bahagi = 3/$day;
+
+
+$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account"; 
+$resSum = mysql_query($sqlSum) or die(mysql_error());
+while ($row = mysql_fetch_array($resSum)){
+	$total =  $row['SUM(jumlah)'];
+}
+$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Debit'";
+$resSub = mysql_query($sqlSub) or die(mysql_error());
+while ($row = mysql_fetch_array($resSub)){
+	$deb =  $row['sum(jumlah)'];
+}
+
+
+$quantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
+$q = mysql_fetch_array ($quantity);
+$quan = $q['quantity'];
+
+
+
 echo "<h1 align='center'>$y $i</h1>";
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
@@ -38,17 +55,26 @@ if($submit)
 			exit();
 		}
 		else
-	{
+		{
 				$sql = "INSERT INTO account (name, email, Jamaun, jumlah, perkara, tarikh, masa, Jbank, Nbank)
 				VALUES('$name','$email','$Jbayaran','$jumlah','$perkara','$date','$time','$Jbank','$Nakaun')";
-			
+				
 				mysql_select_db('sistem_akaun');
 				$retval =  mysql_query($sql, $conn);
 				if ($retval)
 				{
-				$_SESSION['auth']=true;
-				header ("Location: User_FormSend.php");
-				exit();
+						if($quan > 0){
+							$new = $quan - $_POST['jumlah'];
+							$sequal = "UPDATE users SET quantity = '$new' WHERE username = '$i'";
+							$sets =  mysql_query ($sequal);
+							$_SESSION['auth']=true;
+							header ("Location: User_FormSend.php");
+							exit();
+						}
+					 else{
+						$_SESSION['auth']=true;
+						header ("Location: User_confirm.php");
+					}
 				}
 				else
 				{
@@ -64,22 +90,7 @@ if($submit)
 
 	}
 }
-while($oldvalue=mysql_fetch_array($result))
-{
-	$oldjum = $oldvalue['jum.ksluruhan']; 
-}
-if ($update)
-{
-		$SJ = $jumlah;
-		$newJumlah = $oldjum + $SJ;
 
-	
-	mysql_query("update account set jum.ksluruhan='" .$newJumlah. "' ");
-	
-	$_SESSION['auth']=true;
-		header ("Location: FormSend.php");
-		exit();
-}
 
 ?>
 
@@ -209,5 +220,6 @@ if ($update)
 </div>
 </body>
 </html>
+
 
 

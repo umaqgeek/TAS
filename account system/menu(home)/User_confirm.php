@@ -16,7 +16,7 @@ $i=$_SESSION['username'];
 $y= 'hello';
 
 
-$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account"; 
+$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
 	$total =  $row['SUM(jumlah)'];
@@ -27,6 +27,7 @@ while ($row = mysql_fetch_array($resSub)){
 	$deb =  $row['sum(jumlah)'];
 }
 
+$sum = $total - $deb;
 
 $quantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
 $q = mysql_fetch_array ($quantity);
@@ -34,7 +35,7 @@ $quan = $q['quantity'];
 
 
 
-echo "<h1 align='center'>$y $i</h1>";
+echo "<h1 align='center'>$y $i $sum</h1>";
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
@@ -54,8 +55,13 @@ if($submit)
 			header ("Location: User_Ownsite.php");
 			exit();
 		}
-		else
-		{
+		else if($_POST['Jbayaran'] == "Debit" && $sum < $jumlah){
+			echo "Sorry lah derrr baki account tidak mencukupi untuk buat pengeluaran..";
+			$_SESSION['auth']=true;
+			header ("Location: User_confirm.php");
+			exit();
+		}
+		else{
 				$sql = "INSERT INTO account (name, email, Jamaun, jumlah, perkara, tarikh, masa, Jbank, Nbank)
 				VALUES('$name','$email','$Jbayaran','$jumlah','$perkara','$date','$time','$Jbank','$Nakaun')";
 				
@@ -71,13 +77,14 @@ if($submit)
 							header ("Location: User_FormSend.php");
 							exit();
 						}
-					 else{
-						$_SESSION['auth']=true;
-						header ("Location: User_confirm.php");
-					}
+					 	else{
+							$_SESSION['auth']=true;
+							header ("Location: User_confirm.php");
+							exit();
+						}
+					
 				}
-				else
-				{
+				else{
 					die('could not get data : '. mysql_error());;
 				}
 

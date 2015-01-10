@@ -15,6 +15,9 @@ $time=$_POST['time'];
 $i=$_SESSION['username'];
 $y= 'hello';
 
+	
+	$day = $res['day']; // day in database
+	$now = date ('M');
 
 $sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());

@@ -11,14 +11,23 @@ $Jbayaran=$_POST['Jbayaran'];
 $jumlah=$_POST['jumlah'];
 $date=$_POST['date'];
 $time=$_POST['time'];
-
 $i=$_SESSION['username'];
 $y= 'hello';
-
+	
+	
+	
+	date_default_timezone_set("Asia/Kolkata"); 
+	
+	$month = $res['month']; // month in database
+	$today = date ('M'); // current month
 	
 	$day = $res['day']; // day in database
-	$now = date ('M');
-
+	$now = date ('d'); // current time
+	
+	echo $now . $today . date('Y');
+	
+	
+	
 $sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
@@ -29,15 +38,10 @@ $resSub = mysql_query($sqlSub) or die(mysql_error());
 while ($row = mysql_fetch_array($resSub)){
 	$deb =  $row['sum(jumlah)'];
 }
-
 $sum = $total - $deb;
-
 $quantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
 $q = mysql_fetch_array ($quantity);
 $quan = $q['quantity'];
-
-
-
 echo "<h1 align='center'>$y $i $sum</h1>";
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
@@ -46,7 +50,6 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	exit();
 }
 $submit=$_POST['send'];
-
 if($submit)
 {
 	if ($name && $email && $Jbank && $Nakaun && $perkara && $Jbayaran && $date && $time && $jumlah)
@@ -58,7 +61,12 @@ if($submit)
 			header ("Location: User_Ownsite.php");
 			exit();
 		}
-		else if($_POST['Jbayaran'] == "Debit" && $sum < $jumlah){
+		else if($_POST['Jbayaran'] == "Kredit" && $quan < $jumlah){
+			echo "Sorry lah derrr baki account tidak mencukupi untuk buat pengeluaran..";
+			$_SESSION['auth']=true;
+			header ("Location: User_confirm.php");
+			exit();
+		}else if($_POST['Jbayaran'] == "Debit" && $sum < $jumlah){
 			echo "Sorry lah derrr baki account tidak mencukupi untuk buat pengeluaran..";
 			$_SESSION['auth']=true;
 			header ("Location: User_confirm.php");
@@ -90,18 +98,14 @@ if($submit)
 				else{
 					die('could not get data : '. mysql_error());;
 				}
-
 		}
 	}
 	else{
 			$_SESSION['auth']=true;
 			header ("Location: User_CheckForm.php");
 			exit();
-
 	}
 }
-
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -230,6 +234,3 @@ if($submit)
 </div>
 </body>
 </html>
-
-
-

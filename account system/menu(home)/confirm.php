@@ -10,6 +10,8 @@ $Jbayaran=$_POST['Jbayaran'];
 $date=$_POST['date'];
 $time=$_POST['time'];
 
+$limit = "SELECT * FROM users WHERE quantity";
+
 $month = 60*60*24*4;
 
 $i=$_SESSION['username'];

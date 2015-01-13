@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 $dbhost = "localhost";
 $dbuser ="root";
@@ -52,7 +53,23 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 
 <form action="User_confirm.php" method="POST">
 <table align="center">
+<?php
 
+if (isset($_GET['msg']))
+{
+	$message = $_GET['msg'];
+	if($message == 1)
+	echo "<span style='color:green'>Sorry lah derrr dah limit untuk bulan ini..</span>";
+	if($message == 2)
+	echo "<span style='color:red;'>Sorry lah derrr dah limit untuk minggu ini..</span>";
+	if($message == 3)
+	echo "<span style='color:red;'>Sorry lah derrr dah limit untuk hari ini..</span>";
+	if($message == 4)
+	echo "<span style='color:red;'>Sorry lah derrr baki account tidak mencukupi untuk buat pengeluaran..</span>";
+	if($message == 5)
+	echo "<span style='color:red;'>Sila semak form anda</span>";
+}
+?>
 <tr>
 <td align="center">
 <input id="type" type="text" placeholder="Username" name="name" value="<?php echo $_POST['name']; ?>" />

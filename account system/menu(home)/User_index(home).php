@@ -28,7 +28,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 
 <link rel="stylesheet" href="../Menu_css/index_css.css" />
 <link rel="stylesheet" href="../Menu_css/form.css" />
-
+</head>
 <body background="black and white lights street lights 1920x1200 wallpaper_wallpaperswa.com_45.jpg">
 
 <div class="header">
@@ -39,7 +39,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
     <div>
     <ul>
       	<li><a href="User_home.php">Home</a></li>
-        <li><a href="#">Account Form</a></li>
+        <li><a href="User_index(home).php">Account Form</a></li>
         <li><a href="#">Profile</a></li>
       	<li><a href='?logout=true'>Log out</a></li>
 	</ul>
@@ -70,7 +70,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 </tr>
 <tr>
 <td align="center">
-<select name="Jbayaran" id="select" />
+<select name="Jbayaran" id="select">
 <option></option>
 <option>Debit</option>
 <option>Kredit</option>
@@ -134,7 +134,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 
 <tr>
 <td align="center">
-<input type="submit" name="send" />
+<input type="submit" name="send" value="Send" />
 </td>
 </tr>
 
@@ -143,9 +143,8 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 
 </table>
 
+
 </form>
-
-
-
+</div>
 </body>
 </html>

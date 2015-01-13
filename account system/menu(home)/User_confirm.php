@@ -25,7 +25,7 @@ $y= 'hello';
 	$now = date ('d'); // current time
 	
 	echo $now . $today . date('Y');
-	
+	echo "<br/>week = ". date('W');
 	
 	
 $sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
@@ -38,11 +38,28 @@ $resSub = mysql_query($sqlSub) or die(mysql_error());
 while ($row = mysql_fetch_array($resSub)){
 	$deb =  $row['sum(jumlah)'];
 }
+
+
+
 $sum = $total - $deb;
+
 $quantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
 $q = mysql_fetch_array ($quantity);
 $quan = $q['quantity'];
+
+$weekQuantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
+$wq = mysql_fetch_array ($weekQuantity);
+$QuanWeek = $wq['weekQuantity'];
+
+$dayQuantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
+$dq = mysql_fetch_array ($dayQuantity);
+$Quanday = $dq['dayQuantity'];
+
+
 echo "<h1 align='center'>$y $i $sum</h1>";
+
+
+
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
@@ -61,15 +78,28 @@ if($submit)
 			header ("Location: User_Ownsite.php");
 			exit();
 		}
+		
 		else if($_POST['Jbayaran'] == "Kredit" && $quan < $jumlah){
-			echo "Sorry lah derrr baki account tidak mencukupi untuk buat pengeluaran..";
+			echo "Sorry lah derrr dah limit..";
 			$_SESSION['auth']=true;
-			header ("Location: User_confirm.php");
+			header ("Location: User_Confirm 1st.php?msg=1");
 			exit();
-		}else if($_POST['Jbayaran'] == "Debit" && $sum < $jumlah){
+		}else if($_POST['Jbayaran'] == "Kredit" && $QuanWeek < $jumlah){
+			echo "Sorry lah derrr dah limit..";
+			$_SESSION['auth']=true;
+			header ("Location: User_Confirm 1st.php?msg=2");
+			exit();
+		}else if($_POST['Jbayaran'] == "Kredit" && $Quanday < $jumlah){
+			echo "Sorry lah derrr dah limit..";
+			$_SESSION['auth']=true;
+			header ("Location: User_Confirm 1st.php?msg=3");
+			exit();
+		}
+		
+		else if($_POST['Jbayaran'] == "Debit" && $sum < $jumlah){
 			echo "Sorry lah derrr baki account tidak mencukupi untuk buat pengeluaran..";
 			$_SESSION['auth']=true;
-			header ("Location: User_confirm.php");
+			header ("Location: User_Confirm 1st.php?msg=4");
 			exit();
 		}
 		else{
@@ -80,20 +110,35 @@ if($submit)
 				$retval =  mysql_query($sql, $conn);
 				if ($retval)
 				{
-						if($quan > 0){
+					if($_POST['Jbayaran'] == "Kredit"){
+						if($quan && $QuanWeek && $Quanday >= $jumlah){
 							$new = $quan - $_POST['jumlah'];
 							$sequal = "UPDATE users SET quantity = '$new' WHERE username = '$i'";
 							$sets =  mysql_query ($sequal);
+							
+							$newWeek = $QuanWeek - $_POST['jumlah'];
+							$Sequalweek = "UPDATE users SET weekQuantity = '$newWeek' WHERE username = '$i'";
+							$SetWeek = mysql_query ($Sequalweek);
+							
+							$newday = $Quanday - $_POST['jumlah'];
+							$Sequalday = "UPDATE users SET dayQuantity = '$newday' WHERE username = '$i'";
+							$SetDay = mysql_query ($Sequalday);
+							
+							
 							$_SESSION['auth']=true;
 							header ("Location: User_FormSend.php");
 							exit();
 						}
 					 	else{
 							$_SESSION['auth']=true;
-							header ("Location: User_confirm.php");
+							header ("Location: User_FormSend.php");
 							exit();
 						}
-					
+					}else{
+						$_SESSION['auth']=true;
+						header ("Location: User_FormSend.php");
+						exit();
+					}
 				}
 				else{
 					die('could not get data : '. mysql_error());;
@@ -102,7 +147,7 @@ if($submit)
 	}
 	else{
 			$_SESSION['auth']=true;
-			header ("Location: User_CheckForm.php");
+			header ("Location: User_Confirm 1st.php?msg=5");
 			exit();
 	}
 }

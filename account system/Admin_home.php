@@ -40,7 +40,7 @@ echo "<h2 align='center'>$y $i</h2>";
 <li><a href="index_register.php">User Registration</a></li>
 <li><a href="register.php">User Account</a></li>
 <li><a href="#">Report</a></li>
-<li><a href='?logout=true'>Logout</a></li></ul>
+<li><a href="logout.php">Logout</a></li></ul>
 </nav>
 
 
@@ -55,7 +55,7 @@ echo "<h2 align='center'>$y $i</h2>";
 
 <?php
 
-$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account"; 
+$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
 	$total =  $row['SUM(jumlah)'];

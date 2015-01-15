@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 $dbhost = "localhost";
 $dbuser ="root";
 $dbpass = "";
@@ -17,7 +18,7 @@ echo "$y $i";
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
-	header ("Location: login.php");
+	header ("Location: index.php");
 	exit();
 }
 ?>
@@ -41,7 +42,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
       	<li><a href="User_home.php">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
         <li><a href="#">Profile</a></li>
-      	<li><a href='?logout=true'>Log out</a></li>
+      	<li><a href="../logout.php">Log out</a></li>
 	</ul>
 	</div>
     <br />

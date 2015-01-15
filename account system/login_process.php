@@ -97,17 +97,12 @@ if (isset($_POST['username'])){
 	}
 }
 else{
-header ("Location: login.php?msg=2");
+header ("Location: index.php?msg=2");
 exit();
 	}
 }
 
 
-
-
-if($_SESSION['auth']=true){
-	$login = $_SESSION['auth'];
-}
 
 	
 ?>

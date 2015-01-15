@@ -1,88 +1,56 @@
+<?php session_start();
+error_reporting(0);
+$_SESSION['login'] = $_POST['send'];
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
 
-<link rel="stylesheet" href="css/menu(home)_css.css" />
+    <link rel="stylesheet" href="css/login_css.css" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Home(index)</title>
+<title>login</title>
 </head>
 
-<body>
 
-<center><img src="tuffahlogo.png" id="img"></center>
+<body background="img/bg.jpg">
 
-<form action="menu(home)/confirm.php" method="POST">
-<table align="center">
 
-<tr>
-<td align="center"><b>Jenis Bank</b></td>
-</tr>
-<tr>
-<td><select name="Jbank" id="select">
-<option></option>
-<option>Bank Islam</option>
-<option>Maybank</option>
-<option>AgroBank</option>
-<option>Bank Rakyat</option>
-<option>Tabung Haji</option>
-<option>CIMBank</option>
-<option>Bank Simpanan Berhad(BSN)</option>
-</select>
-</td><br />
-</tr>
+<center>
+<fieldset>
 
-<tr>
-<td align="center">
-<input type="text" name="Nakaun" placeholder="Number Akaun">
-</td><br />
-</tr>
+<img src="tuffahlogo.png" />
 
-<tr>
-<td align="center">
-<input type="text" name="perkara" placeholder="Perkara">
-</td>
-</tr>
+<div id="login" align="center">
+<h1 align="center" font>Account System</h1>
+  <h2 align="center">Log in</h2>
 
-<tr>
-<td align="center"><b>Jenis Pembayaran :</b></td>
-</tr>
-<tr>
-<td align="center">
-<select name="Jbayaran" id="select">
-<option></option>
-<option>Debit</option>
-<option>Kredit</option>
-</select>
-</td>
-</tr>
 
-<tr>
-<td align="center"><b>Tarikh</b></td>
-</tr>
-<tr>
-<td align="center">
-<input id="select" type="date" name="date" placeholder="Tarikh" align="middle">
-</td>
-</tr>
+<?php
 
-<tr>
-<td align="center"><b>Masa</b></td>
-</tr>
-<tr>
-<td align="center">
-<input type="time" id="select" name="time" placeholder="Masa" align="middle">
-</td>
-</tr>
+if (isset($_GET['msg']))
+{
+	$message = $_GET['msg'];
+	if($message == 1)
+	echo "<span style='color:green'>Your entry has been saved!</span>";
+	if($message == 2)
+	echo "<span style='color:red;'>Invalid Username or password</span>";
+	if($message == 3)
+	echo "<span style='color:red;'>Please fill all the form</span>";
+}
+?>
 
-<tr>
-<td align="center">
-<input type="submit" name="send" value="Send">
-</td>
-</tr>
-</table>
-
-</form>
+  
+  <form action="login_process.php" method="post" id="form">
+  <input type="text" name="username" placeholder="Username"/><br /><br />
+    <input type="password" name="password" placeholder="Password" />
+    <input type="submit" value="Log in" />
+    
+    </form>
+ 
+</div>
+</fieldset>
+</center>
 
 </body>
 </html>

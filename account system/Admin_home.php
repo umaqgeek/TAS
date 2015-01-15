@@ -71,7 +71,7 @@ while ($row = mysql_fetch_array($resSub)){
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
-	header ("Location: login.php");
+	header ("Location: index.php");
 	exit();
 }
 

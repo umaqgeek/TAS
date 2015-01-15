@@ -48,6 +48,7 @@ echo "<h2 align='center'>$y $i</h2>";
 </div>
 
 <br /><br /><br /><br /><br/>
+<a href="table.php">Show in table</a>
 <div>
 <fieldset>
 <table align="center" border="1">

@@ -98,7 +98,7 @@ $i = 1;
 
 while($rows=mysql_fetch_array($result))
 {
-	$user=$rows['username'];
+	$user=$rows['name'];
 		
 		
 	echo'<tr align="center">';
@@ -114,7 +114,7 @@ while($rows=mysql_fetch_array($result))
 	echo'<td width="100" align="center">'.$rows['jumlah'].'</td>';
 	
 	echo'<td><a href="update_register.php?username='.$user.'">Edit</a></td>';
-	echo'<td><a href="delete_register.php?username='.$user.'">Delete</a></td>';
+	echo'<td><a href="delete report.php?username='.$user.'">Delete</a></td>';
 	echo'</tr>';
 	
 	$i++;

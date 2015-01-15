@@ -8,7 +8,7 @@ or die ("Error connecting to MySQL");
 $db = "sistem_akaun";
 mysql_select_db($db) or
 die ("Error connecting to Database: ".$dbname);
-
+$login = $_SESSION['send'] ;
 
 if (isset($_POST['username'])){
 	$username = $_POST['username'];
@@ -37,7 +37,6 @@ if (isset($_POST['username'])){
 	
 
     date_default_timezone_set("Asia/Kolkata"); 
-	$calMonth = 
 	$month = $row['month']; // month in database
 	$today = date ("M"); // current month
 	
@@ -46,6 +45,9 @@ if (isset($_POST['username'])){
 	
 	$day = $row['day']; // day in database
 	$now = date ("d"); // current time
+	
+	
+	
 	
 	
 	if (mysql_num_rows($res) > 0){
@@ -57,7 +59,7 @@ if (isset($_POST['username'])){
 		header ("Location: menu(home)/User_home.php");
 	}
 	else{
-		$query= mysql_query ("UPDATE users SET month = '$today' , quantity = '3000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
+		$query= mysql_query ("UPDATE users SET month = '$today' , quantity = '30000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
 		header ("Location: menu(home)/User_home.php");
@@ -68,7 +70,7 @@ if (isset($_POST['username'])){
 		$_SESSION['username']= $_POST['username'];
 		header ("Location: menu(home)/User_home.php");
 	}else{
-		$Query= mysql_query ("UPDATE users SET week = '$latest' , weekQuantity = '1000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
+		$Query= mysql_query ("UPDATE users SET week = '$latest' , weekQuantity = '10000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
 		header ("Location: menu(home)/User_home.php");
@@ -79,7 +81,17 @@ if (isset($_POST['username'])){
 		$_SESSION['username']= $_POST['username'];
 		header ("Location: menu(home)/User_home.php");
 	}else{
-		$Query= mysql_query ("UPDATE users SET day = '$now' , dayQuantity = '500' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
+		$Query= mysql_query ("UPDATE users SET day = '$now' , dayQuantity = '5000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
+		$_SESSION['username']= $_POST['username'];
+		header ("Location: menu(home)/User_home.php");
+	}
+	
+	if($log==$in){
+		$_SESSION['auth']=true;
+		$_SESSION['username']= $_POST['username'];
+		header ("Location: menu(home)/User_home.php");
+	}else{
+		$Query= mysql_query ("UPDATE users SET in = '$in' , log = '3000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
 		$_SESSION['username']= $_POST['username'];
 		header ("Location: menu(home)/User_home.php");
 	}
@@ -91,6 +103,11 @@ exit();
 }
 
 
+
+
+if($_SESSION['auth']=true){
+	$login = $_SESSION['auth'];
+}
 
 	
 ?>

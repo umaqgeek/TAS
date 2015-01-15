@@ -58,8 +58,10 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 if (isset($_GET['msg']))
 {
 	$message = $_GET['msg'];
+	if($message == 0)
+	echo "<span style='color:red'>Sorry, sender must be own of this account</span>";
 	if($message == 1)
-	echo "<span style='color:green'>Sorry lah derrr dah limit untuk bulan ini..</span>";
+	echo "<span style='color:red'>Sorry lah derrr dah limit untuk bulan ini..</span>";
 	if($message == 2)
 	echo "<span style='color:red;'>Sorry lah derrr dah limit untuk minggu ini..</span>";
 	if($message == 3)
@@ -68,6 +70,8 @@ if (isset($_GET['msg']))
 	echo "<span style='color:red;'>Sorry lah derrr baki account tidak mencukupi untuk buat pengeluaran..</span>";
 	if($message == 5)
 	echo "<span style='color:red;'>Sila semak form anda</span>";
+	if($message == 6)
+	echo "<span style='color:red;'>Sorry lah derrr setiap transaksi hanya boleh dibuat kurang dari rm3000..</span>";
 }
 ?>
 <tr>

@@ -75,10 +75,15 @@ if($submit)
 		{
 			echo "Sorry, sender must be own of this account\n\n";
 			$_SESSION['auth']=true;
-			header ("Location: User_Ownsite.php");
+			header ("Location: User_Confirm 1st.php?msg=0");
 			exit();
 		}
 		
+		else if($jumlah > 3000){
+			$_SESSION['auth']=true;
+			header ("Location: User_Confirm 1st.php?msg=6");
+			exit();
+		}
 		else if($_POST['Jbayaran'] == "Kredit" && $quan < $jumlah){
 			echo "Sorry lah derrr dah limit..";
 			$_SESSION['auth']=true;

@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-require("connect.php");
+require("connect_manageUser.php");
 
 
 $i=$_SESSION['username'];

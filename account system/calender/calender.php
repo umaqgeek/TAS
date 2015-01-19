@@ -163,7 +163,10 @@ echo date(DATE_ATOM, mktime(0, 0, 0, 7, 1, 2000));
 
 $now = date ('d');
 echo "<br/>";
-echo $now .date('l');
+echo $now .date('l')."<br/>";
+
+//huruf besar utk format 24 jam,huruf kecik utk format 12jam(h/H)
+
 ?>
 </body>
 </html>

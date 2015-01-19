@@ -21,6 +21,7 @@ if (isset($_POST['username'])){
 	{
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
+		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: Admin Account.php");
 		exit();
 	}
@@ -56,29 +57,34 @@ if (isset($_POST['username'])){
 	{
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
+		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: menu(home)/User_home.php");
 	}
 	else{
 		$query= mysql_query ("UPDATE users SET month = '$today' , quantity = '30000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
+		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: menu(home)/User_home.php");
 	}
 		
 	if($week==$latest){
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
+		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: menu(home)/User_home.php");
 	}else{
 		$Query= mysql_query ("UPDATE users SET week = '$latest' , weekQuantity = '10000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
+		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: menu(home)/User_home.php");
 	}
 		
 	if($day==$now){
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
+		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: menu(home)/User_home.php");
 	}else{
 		$Query= mysql_query ("UPDATE users SET day = '$now' , dayQuantity = '5000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
@@ -89,10 +95,12 @@ if (isset($_POST['username'])){
 	if($log==$in){
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
+		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: menu(home)/User_home.php");
 	}else{
 		$Query= mysql_query ("UPDATE users SET in = '$in' , log = '3000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
 		$_SESSION['username']= $_POST['username'];
+		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: menu(home)/User_home.php");
 	}
 }

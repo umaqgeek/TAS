@@ -11,7 +11,7 @@ echo "<h2 align='center'>$y $i</h2>";
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
-	header ("Location: login.php");
+	header ("Location: index.php");
 	exit();
 }
 
@@ -38,7 +38,6 @@ if($submit)
 			$pass = $_POST["pass"];
 			if (strlen($pass)<8)
 			{
-				
 				header ("Location: p_1char(register).php");
 				echo "<p align='center'><b>Password must be at least 8 character \n\n</b></p>";
 				exit();

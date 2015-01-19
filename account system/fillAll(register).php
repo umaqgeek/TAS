@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting();
+error_reporting(0);
 $result=mysql_query("select * from account");
 
 $i=$_SESSION['username'];
@@ -11,7 +11,7 @@ echo "<h2 align='center'>$y $i</h2>";
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
-	header ("Location: login.php");
+	header ("Location: index.php");
 	exit();
 }
 

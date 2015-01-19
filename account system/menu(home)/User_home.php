@@ -2,8 +2,9 @@
 session_start();
 error_reporting(0);
 $i=$_SESSION['username'];
+$p=$_SESSION['pass'];
 $y= 'hello';
-echo "$y $i";
+echo "$y $i $p";
 
 
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
@@ -34,8 +35,8 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
     <ul>
       	<li><a href="#">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
-        <li><a href="#">Profile</a></li>
-      	<li><a href='?logout=true'>Log out</a></li>
+        <li><a href="user_profile.php">Profile</a></li>
+      	<li><a href="../logout.php">Log out</a></li>
 	</ul>
 	</div>
     <br />

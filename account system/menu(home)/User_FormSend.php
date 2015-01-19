@@ -17,7 +17,7 @@ echo "<h1 align='center'>$y $i</h1>";
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
-	header ("Location: login.php");
+	header ("Location: index.php");
 	exit();
 }
 $submit=$_POST['send'];
@@ -84,7 +84,7 @@ if($submit)
       	<li><a href="User_home.php">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
         <li><a href="#">Profile</a></li>
-      	<li><a href='?logout=true'>Log out</a></li>
+      	<li><a href="../logout.php">Log out</a></li>
 	</ul>
 	</div>
     <br />

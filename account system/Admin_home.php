@@ -1,13 +1,14 @@
 <?php
 session_start();
 error_reporting(0);
-require("connect.php");
+require("connect_manageUser.php");
 $result=mysql_query("select * from account");
 $i = 1;
 
 $i=$_SESSION['username'];
 $y= 'hello';
-echo "<h2 align='center'>$y $i</h2>";
+$id =$_SESSION['id'];
+echo "<h2 align='center'>$y $i $id</h2>";
 
 ?>
 
@@ -48,7 +49,7 @@ echo "<h2 align='center'>$y $i</h2>";
 </div>
 
 <br /><br /><br /><br /><br/>
-<a href="table.php">Show in table</a>
+<a href="try table/table.php">Show in table</a>
 <div>
 <fieldset>
 <table align="center" border="1">
@@ -59,13 +60,13 @@ echo "<h2 align='center'>$y $i</h2>";
 $sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
-	$total =  $row['SUM(jumlah)'];
+	$Cre =  $row['SUM(jumlah)'];
 }
 
 $sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Debit'";
 $resSub = mysql_query($sqlSub) or die(mysql_error());
 while ($row = mysql_fetch_array($resSub)){
-	$deb =  $row['sum(jumlah)'];
+	$total =  $row['sum(jumlah)'];
 }
 
 if(isset($_GET['logout']) && $_GET['logout'] == "true"){
@@ -150,7 +151,7 @@ while($rows=mysql_fetch_array($result))
 	echo'<tr>';
 	echo'<td><h3><b>Jumlah terkini</b></h3></td>';
 	echo'<td><b>:</b></td>';
-	echo'<td width="100" align="center">'.$total.' - '.$deb.'='.($total-$deb).'</td>';
+	echo'<td width="100" align="center">'.$total.' - '.$Cre.'='.($total-$Cre).'</td>';
 	echo'</tr>';
 	
 	echo'</tr>';

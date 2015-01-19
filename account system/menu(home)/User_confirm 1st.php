@@ -10,6 +10,11 @@ $db = "sistem_akaun";
 mysql_select_db($db) or
 die ("Error connecting to Database: ".$dbname);
 
+date_default_timezone_set("Asia/Kuala_Lumpur");
+$tarikh = date("d/M/Y");
+$jam = date("H/i/s A");
+
+
 $i=$_SESSION['username'];
 $y= 'hello';
 echo "$y $i";
@@ -41,7 +46,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
     <ul>
       	<li><a href="User_home.php">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
-        <li><a href="#">Profile</a></li>
+        <li><a href="user_profile.php">Profile</a></li>
       	<li><a href="../logout.php">Log out</a></li>
 	</ul>
 	</div>
@@ -76,13 +81,7 @@ if (isset($_GET['msg']))
 ?>
 <tr>
 <td align="center">
-<input id="type" type="text" placeholder="Username" name="name" value="<?php echo $_POST['name']; ?>" />
-</td>
-</tr>
-
-<tr>
-<td align="center">
-<input id="type" type="email" placeholder="E-mail" name="email" value="<?php echo $_POST['email']; ?>" />
+<input id="type" type="text" placeholder="Username" name="name" value="<?php echo $i  ?>" />
 </td>
 </tr>
 
@@ -123,11 +122,6 @@ if (isset($_GET['msg']))
 </td><br />
 </tr>
 
-<tr>
-<td align="center">
-<input type="text" id="type" placeholder="Number Akaun" name="Nakaun" value="<?php echo $_POST['Nakaun']; ?>" />
-</td><br />
-</tr>
 
 <tr>
 <td align="center">
@@ -140,7 +134,7 @@ if (isset($_GET['msg']))
 </tr>
 <tr>
 <td align="center">
-<input type="date" placeholder="Tarikh" id="select" name="date" value="<?php echo $_POST['date']; ?>" />
+<input placeholder="Tarikh" id="type" name="date" value="<?php echo $tarikh ?>" />
 </td>
 </tr>
 
@@ -149,7 +143,7 @@ if (isset($_GET['msg']))
 </tr>
 <tr>
 <td align="center">
-<input type="time" placeholder="Masa" name="time" id="select" value="<?php echo $_POST['time']; ?>" />
+<input placeholder="Masa" name="time" id="type" value="<?php echo $jam ?>" />
 </td>
 </tr>
 

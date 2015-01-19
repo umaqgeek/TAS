@@ -3,6 +3,7 @@
 error_reporting(0);
 include("connect_manageUser.php");
 $user=$_REQUEST['username'];
+$id = $REQUEST['pass'];
 $update=$_POST['update'];
 $result=mysql_query("select * from users where username='" .$user. "'");
 while($oldvalue=mysql_fetch_array($result))
@@ -31,6 +32,7 @@ if ($update)
 		header ("Location: Admin_manage user.php");
 		exit();
 }
+echo $id;
 ?>
 
 

@@ -129,20 +129,20 @@ while($row = mysql_fetch_array($result)){
 
 }
 
-$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Kredit'"; 
+$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Debit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
-	$total =  $row['SUM(jumlah)'];
+	$deb =  $row['SUM(jumlah)'];
 }
 
-$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Debit'";
+$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit'";
 $resSub = mysql_query($sqlSub) or die(mysql_error());
 while ($row = mysql_fetch_array($resSub)){
-	$deb =  $row['sum(jumlah)'];
+	$Cre =  $row['sum(jumlah)'];
 }
 
-echo "<br />total = ". $total;
-echo "<br />total kredit = ". ($total - $deb);
+echo "<br /><b>Debit</b>(".$deb.") - <b>Credit</b>(".$Cre.")";
+echo "<br />Balance = ". ($deb - $Cre);
 ?>
 
 

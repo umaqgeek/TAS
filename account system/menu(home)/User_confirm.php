@@ -2,6 +2,7 @@
 session_start();
 error_reporting(0);
 require ("User_connect.php");
+
 $name=$_POST['name'];
 $email=$_POST['email'];
 $Jbank=$_POST['Jbank'];
@@ -12,6 +13,7 @@ $jumlah=$_POST['jumlah'];
 $date=$_POST['date'];
 $time=$_POST['time'];
 $i=$_SESSION['username'];
+$link = $_SESSION['id'];
 $y= 'hello';
 	
 
@@ -112,8 +114,8 @@ if($submit)
 			exit();
 		}
 		else{
-				$sql = "INSERT INTO account (name, Jamaun, jumlah, perkara, tarikh, masa, Jbank)
-				VALUES('$name','$Jbayaran','$jumlah','$perkara','$date','$time','$Jbank')";
+				$sql = "INSERT INTO account (name, Jamaun, jumlah, perkara, tarikh, masa, Jbank, link_id)
+				VALUES('$name','$Jbayaran','$jumlah','$perkara','$date','$time','$Jbank','$link')";
 				
 				mysql_select_db('sistem_akaun');
 				$retval =  mysql_query($sql, $conn);
@@ -181,6 +183,7 @@ if($submit)
       	<li><a href="User_home.php">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
         <li><a href="user_profile.php">Profile</a></li>
+        <li><a href="">Check Transaction</a></li>
       	<li><a href="../logout.php">Log out</a></li>
 	</ul>
 	</div>

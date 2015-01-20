@@ -16,6 +16,7 @@ $jam = date("h/i/s A");
 
 $i=$_SESSION['username'];
 $p=$_SESSION['pass'];
+$id=$_SESSION['id'];
 $y= 'hello';
 echo "$y $i $p";
 
@@ -143,7 +144,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 
 <?php
 
-$call = mysql_query("SELECT * FROM account WHERE name='" .$i. "'");
+$call = mysql_query("SELECT * FROM account WHERE name='" .$i. "' AND id='" .$id. "'");
 while($calling = mysql_fetch_array($call)){
 	$name = $calling['name'];
 	$Jamaun = $calling['Jamaun'];
@@ -195,7 +196,7 @@ echo "</table>";
 
 <?php
 
-$query = "SELECT Jamaun, COUNT(name), SUM(jumlah) FROM account WHERE name='" .$i. "' GROUP BY Jamaun "; 
+$query = "SELECT Jamaun, COUNT(name), SUM(jumlah) FROM account WHERE name='" .$i. "' AND id='".$id."' GROUP BY Jamaun "; 
 $result = mysql_query($query) or die(mysql_error());
 
 // Print out result from user amount transacation
@@ -212,7 +213,7 @@ while ($row = mysql_fetch_array($resSum)){
 	$deb =  $row['SUM(jumlah)'];
 }
 
-$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit' and name = '" .$i. "'";
+$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit' and name = '" .$i. "' AND id='".$id."'";
 $resSub = mysql_query($sqlSub) or die(mysql_error());
 while ($row = mysql_fetch_array($resSub)){
 	$Cre =  $row['sum(jumlah)'];
@@ -224,7 +225,7 @@ echo "<br />Balance = ". ($deb - $Cre);
 
 
 //limit for user transaction (per/month)
-$limit = "SELECT month, SUM(quantity) FROM users WHERE username ='" .$i. "'";
+$limit = "SELECT month, SUM(quantity) FROM users WHERE username ='" .$i. "' AND id='".$id."'";
 $M = mysql_query($limit);
 while ($month = mysql_fetch_array($M)){
 	$monthQuantity = $month['SUM(quantity)'];
@@ -248,7 +249,7 @@ while ($week = mysql_fetch_array($W)){
 }
 
 //limit for user transaction (per/day)
-$Dlimit = "SELECT day, SUM(dayQuantity) FROM users WHERE username ='" .$i. "'";
+$Dlimit = "SELECT day, SUM(dayQuantity) FROM users WHERE username ='" .$i. "' AND id='".$id."'";
 $D = mysql_query($Dlimit);
 while ($day = mysql_fetch_array($D)){
 	$dayQuantity = $day['SUM(dayQuantity)'];

@@ -31,29 +31,28 @@
 
 <?php
 session_start();
+
+$y= 'hello';
+$i=$_SESSION['username'];
+echo "$y $i";
+
 error_reporting(0);
 require("connect_manageUser.php");
 $result=mysql_query("select * from users");
 $i = 1;
 
-$i=$_SESSION['username'];
-$y= 'hello';
-echo "$y $i";
-
-
-if(isset($_GET['logout']) && $_GET['logout'] == "true"){
+/*--if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 	session_destroy();
 	echo "<br/>Successfully logged out.";
 	header ("Location: login.php");
 	exit();
 }else{
 	echo "<br/><a href='?logout=true'>Logout</a>";
-}
+}---*/
 
 while($rows=mysql_fetch_array($result))
 {
-	$user=$rows['username'];
-		
+	$user=$rows['username'];	
 		
 	echo'<tr align="center">';
 	echo'<td width="100" align="center">'.$i.'</td>';

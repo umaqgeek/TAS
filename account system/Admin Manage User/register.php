@@ -53,7 +53,8 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 while($rows=mysql_fetch_array($result))
 {
 	$user=$rows['username'];
-		
+	$id=$rows['id'];
+	$p=$rows['pass'];	
 		
 	echo'<tr align="center">';
 	echo'<td width="100" align="center">'.$i.'</td>';
@@ -65,8 +66,8 @@ while($rows=mysql_fetch_array($result))
 	echo'<td width="100" align="center">'.$rows['email'].'</td>';
 	echo'<td width="100" align="center">'.$rows['address'].'</td>';
 	
-	echo'<td><a href="update.php?username='.$user.'">Edit</a></td>';
-	echo'<td><a href="delete.php?username='.$user.'">Delete</a></td>';
+	echo'<td><a href="update.php?username='.$user.' AND id='.$id.' AND pass='.$p.'">Edit</a></td>';
+	echo'<td><a href="delete.php?username='.$user.' AND id='.$id.' AND pass='.$p.'">Delete</a></td>';
 	echo'</tr>';
 	
 	$i++;

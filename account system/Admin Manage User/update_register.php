@@ -3,9 +3,11 @@
 error_reporting(0);
 include("connect_manageUser.php");
 $user=$_REQUEST['username'];
-$id = $REQUEST['pass'];
+$pas = $_REQUEST['pass'];
+$id = $_REQUEST['id'];
 $update=$_POST['update'];
-$result=mysql_query("select * from users where username='" .$user. "'");
+echo $user;
+$result=mysql_query("select * from users where username='" .$user. "' AND id='" .$id. "'");
 while($oldvalue=mysql_fetch_array($result))
 {
 	$oldname = $oldvalue['username']; 
@@ -32,7 +34,7 @@ if ($update)
 		header ("Location: Admin_manage user.php");
 		exit();
 }
-echo $id;
+echo $user;
 ?>
 
 
@@ -59,7 +61,7 @@ echo $id;
 <td>username</td>
 <td>:</td>
 <td>
-<input type="text" name="name" value="<?php echo $oldname ?>" />
+<input type="text" name="name" value="<?php echo $oldname ." and ".$user ?>" />
 </td>
 </tr>
 

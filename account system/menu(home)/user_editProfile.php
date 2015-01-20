@@ -12,6 +12,7 @@ mysql_select_db($db) or
 die ("Error connecting to Database: ".$dbname);
 
 $i=$_SESSION['username'];
+$link=$_SESSION['id'];
 ?>
 
 
@@ -53,7 +54,7 @@ $i=$_SESSION['username'];
 
 <?php
 $update = $_POST['update'];
-$SQL = "SELECT * FROM users WHERE username='" .$i. "'";
+$SQL = "SELECT * FROM users WHERE username='" .$i. "' AND id='" .$link. "'";
 $QUERY = mysql_query($SQL);
 while($edit=mysql_fetch_array($QUERY)){
 	$oldname = $edit['username']; 
@@ -73,10 +74,10 @@ if ($update){
 	$newfname = $_POST['fname'];
 	$newaddress = $_POST['address'];
 	
-	mysql_query("update users set username='" .$newUsername. "', pass='" .$newpass. "', Fname='" .$newfname. "', ic='" .$newic. "', tel='" .$newtel. "', email='" .$newemail. "', address='" .$newaddress. "' where username='" .$i. "'");
+	mysql_query("update users set username='" .$newUsername. "', pass='" .$newpass. "', Fname='" .$newfname. "', ic='" .$newic. "', tel='" .$newtel. "', email='" .$newemail. "', address='" .$newaddress. "' where username='" .$i. "' AND id='" .$link. "'");
 	
 	
-	$passStr = "SELECT * FROM users";
+	$passStr = "SELECT * FROM users WHERE id != '".$link."'";
 	$Str = mysql_query($passStr);
 	while($strength = mysql_fetch_array($Str)){
 		$strPass = $strength['pass'];
@@ -95,7 +96,6 @@ if ($update){
 
 <div>
 <form action="" method="POST" class="table">
-
 <table align="center">
 
 <tr>

@@ -33,6 +33,7 @@ echo "$y $me $link $p";
 
 <link rel="stylesheet" href="../Menu_css/index_css.css" />
 
+
 <title>check transaction</title>
 </head>
 
@@ -55,96 +56,132 @@ echo "$y $me $link $p";
 	</div>
     <br />
     <br />
+</div>
+<fieldset>
+<table align="center">
+
+<tr>
+<div>
+
+
+
+
+
+	<table align='center' border='1'>
+
+		<table border='1' bordercolor='#000000' width='832' align='center'>
+			<tr>
+				<td width='64' align='center'><b>status</b></td>
+				<td width='21' align='center'><b>no</b></td>
+				<td width='58' align='center'><b>id</b></td>
+				<td width='58' align='center'><b>name</b></td>
+				<td width='124' align='center'><b>jenis amaun</b></td>
+				<td width='108' align='center'><b>jenis bank</b></td>
+				<td width='44' align='center'><b>jumlah</b></td>
+    			<td width='85' align='center'><b>perkara</b></td>
+				<td width='56' align='center'><b>masa</b></td>
+    			<td width='255' align='center'><b>tarikh</b></td>
+    
+				<td width='13' colspan='2'></td>
+			</tr>
+  
+
 
 <?php
-
-$result = mysql_query("SELECT * FROM account WHERE name='" .$me. "' AND link_id='" .$link. "'");
+$result = mysql_query("SELECT * FROM account WHERE name='" .$me. "' AND link_id='" .$link. "' AND semak='Baru'");
 while($rows=mysql_fetch_array($result))
 {
 	$user=$rows['id'];
-	
-	echo'<table align="center">';
 	echo'<tr>';	
-	echo'<td width="100" align="center" colspan="3"><h3><b>'.$rows['semak'].'</b><h3></td>';
-	echo'</tr>';
-		
-	echo'<tr align="center">';
-	echo'<td><b>id</b></td>';
-	echo'<td><b>:</b></td>';
+	echo'<td width="100" align="center"><h3><b>'.$rows['semak'].'</b><h3></td>';
 	echo'<td width="100" align="center">'.$i.'</td>';
-	echo'</tr>';
-	
-	echo'<tr>';
-	echo'<td><b>Username</b></td>';
-	echo'<td><b>:</b></td>';
+	echo'<td width="100" align="center">'.$rows['id'].'</td>';
 	echo'<td width="100" align="center">'.$rows['name'].'</td>';
-	echo'</tr>';
-	
-	echo'<tr>';
-	echo'<td><b>Jenis Amaun</b></td>';
-	echo'<td><b>:</b></td>';
 	echo'<td width="100" align="center">'.$rows['Jamaun'].'</td>';
-	echo'</tr>';
-	
-	echo'<tr>';
-	echo'<td><b>Jenis Bank</b></td>';
-	echo'<td><b>:</b></td>';
 	echo'<td width="100" align="center">'.$rows['Jbank'].'</td>';
-	echo'</tr>';
-	
-	echo'<tr>';
-	echo'<td><b>Masa</b></td>';
-	echo'<td><b>:</b></td>';
-	echo'<td width="100" align="center">'.$rows['masa'].'</td>';
-	echo'</tr>';
-	
-	echo'<tr>';
-	echo'<td><b>Jumlah amaun</b></td>';
-	echo'<td><b>:</b></td>';
 	echo'<td width="100" align="center">'.$rows['jumlah'].'</td>';
-	echo'</tr>';
-	
-	echo'<tr>';
-	echo'<td><b>No. Akaun</b></td>';
-	echo'<td><b>:</b></td>';
-	echo'<td width="100" align="center">'.$rows['Nbank'].'</td>';
-	echo'</tr>';
-	
-	echo'<tr>';
-	echo'<td><b>Perkara</b></td>';
-	echo'<td><b>:</b></td>';
 	echo'<td width="100" align="center">'.$rows['perkara'].'</td>';
-	echo'</tr>';
-	
-	echo'<tr>';
-	echo'<td><b>Tarikh</b></td>';
-	echo'<td><b>:</b></td>';
+	echo'<td width="100" align="center">'.$rows['masa'].'</td>';
 	echo'<td width="100" align="center">'.$rows['tarikh'].'</td>';
+	echo'<td><a href="User_edit_Transaction.php?id='.$user.'">Edit</a></td>';
+	echo'<td><a href="user_delete_transaction.php?id='.$user.'">Delete</a></td>';
 	echo'</tr>';
 
-	echo'<tr>';
-	
-	echo'<table align="center">';
-	echo'<tr>';
-	echo'<td align="left"><a href="conect_delete.php?id='.$user.'">Delete</a></td>';
-	echo'<td align="right"><a href="connect_semak.php?semak='.$user.'">Semak</a></td>';
-	echo'</tr>';
-	echo'</table>';
-	
-	echo'<tr>';
-	echo'<td><h3><b>Jumlah terkini</b></h3></td>';
-	echo'<td><b>:</b></td>';
-	echo'<td width="100" align="center">'.$total.' - '.$Cre.'='.($total-$Cre).'</td>';
-	echo'</tr>';
-	
-	echo'</tr>';
-	echo'</table><br/><br/><br/>';
 	$i++;
-	
-	echo '<hr/>';
-	echo '<br/>';
+
 }
 
 ?>
+
+		<hr/>
+
+		</table>
+	</table>
+</div>
+
+<br/><br/><br/>
+
+
+</tr>
+<tr>
+<div>
+
+
+	<table border="1" bordercolor="#000000" width="832" align="center">
+		<tr>
+			<td width="64" align="center"><b>status</b></td>
+			<td width="21" align="center"><b>no</b></td>
+			<td width="58" align="center"><b>id</b></td>
+			<td width="58" align="center"><b>name</b></td>
+			<td width="124" align="center"><b>jenis amaun</b></td>
+			<td width="108" align="center"><b>jenis bank</b></td>
+			<td width="44" align="center"><b>jumlah</b></td>
+    		<td width="85" align="center"><b>perkara</b></td>
+			<td width="56" align="center"><b>masa</b></td>
+    		<td width="255" align="center"><b>tarikh</b></td>
+    
+		</tr>
+  
+
+<?php
+
+$result = mysql_query("SELECT * FROM account WHERE name='" .$me. "' AND link_id='" .$link. "' AND semak='Disemak'");
+while($rows=mysql_fetch_array($result))
+{
+	$user=$rows['id'];
+	echo'<tr>';	
+	echo'<td width="100" align="center"><h3><b>'.$rows['semak'].'</b><h3></td>';
+	echo'<td width="100" align="center">'.$i.'</td>';
+	echo'<td width="100" align="center">'.$rows['id'].'</td>';
+	echo'<td width="100" align="center">'.$rows['name'].'</td>';
+	echo'<td width="100" align="center">'.$rows['Jamaun'].'</td>';
+	echo'<td width="100" align="center">'.$rows['Jbank'].'</td>';
+	echo'<td width="100" align="center">'.$rows['jumlah'].'</td>';
+	echo'<td width="100" align="center">'.$rows['perkara'].'</td>';
+	echo'<td width="100" align="center">'.$rows['masa'].'</td>';
+	echo'<td width="100" align="center">'.$rows['tarikh'].'</td>';
+	echo'</tr>';
+
+	$i++;
+
+}
+
+?>
+
+<hr/>
+
+</table>
+</div>
+
+
+
+
+
+</tr>
+</table>
+
+</fieldset>
+
+
 </body>
 </html>

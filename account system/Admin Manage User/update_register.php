@@ -61,7 +61,7 @@ echo $user;
 <td>username</td>
 <td>:</td>
 <td>
-<input type="text" name="name" value="<?php echo $oldname ." and ".$user ?>" />
+<input type="text" name="name" value="<?php echo $oldname  ?>" />
 </td>
 </tr>
 

@@ -36,16 +36,16 @@ $result=mysql_query("select * from account");
 <!DOCTYPE>
 <html>
 <head>
-<link rel="stylesheet" href="css/lay_menu.css">
-<link rel="stylesheet" href="css/susun_menu.css">
-<link rel="stylesheet" href="css/Admin(home).css" />
+<link rel="stylesheet" href="../css/lay_menu.css">
+<link rel="stylesheet" href="../css/susun_menu.css">
+<link rel="stylesheet" href="../css/Admin(home).css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Home</title>
 </head>
 
 <body bgcolor="#CCCCCC">
 
-<img src="tuffahlogo.png" />
+<img src="../tuffahlogo.png" />
 
 
 
@@ -58,11 +58,11 @@ $result=mysql_query("select * from account");
 
 <nav>
 <ul>
-<li><a href="Admin Account.php">Home</a></li>
-<li><a href="index_register.php">User Registration</a></li>
-<li><a href="register.php">User Account</a></li>
+<li><a href="../Admin_home.php">Home</a></li>
+<li><a href="../index_register.php">User Registration</a></li>
+<li><a href="../register.php">User Account</a></li>
 <li><a href="#">Report</a></li>
-<li><a href=''>Logout</a></li></ul>
+<li><a href="../logout.php">Logout</a></li></ul>
 </nav>
 
 
@@ -70,7 +70,7 @@ $result=mysql_query("select * from account");
 </div>
 
 <br /><br /><br /><br /><br/>
-<div>
+
 <fieldset>
 <table align="center" border="1">
 
@@ -98,7 +98,7 @@ $i = 1;
 
 while($rows=mysql_fetch_array($result))
 {
-	$user=$rows['name'];
+	$user=$rows['id'];
 		
 		
 	echo'<tr align="center">';
@@ -112,9 +112,9 @@ while($rows=mysql_fetch_array($result))
 	echo'<td width="100" align="center">'.$rows['perkara'].'</td>';
 	echo'<td width="100" align="center">'.$rows['tarikh'].'</td>';
 	echo'<td width="100" align="center">'.$rows['jumlah'].'</td>';
-	
-	echo'<td><a href="update_register.php?username='.$user.'">Edit</a></td>';
-	echo'<td><a href="delete report.php?username='.$user.'">Delete</a></td>';
+
+	echo'<td><a href="delete report.php?id='.$user.'">Delete</a></td>';
+	echo'<td align="right"><a href="connect_semak.php?semak='.$user.'">Semak</a></td>';
 	echo'</tr>';
 	
 	$i++;
@@ -129,11 +129,21 @@ while($row = mysql_fetch_array($result)){
 
 }
 
+
+$sqlbaki=mysql_query("SELECT Baki FROM setting");
+while($baki=mysql_fetch_array($sqlbaki)){
+	$akaun=$baki['Baki'];
+	}
+	
+
 $sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Debit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
-	$deb =  $row['SUM(jumlah)'];
+	$debit =  $row['SUM(jumlah)'];
 }
+
+$deb = $debit + $akaun;
+
 
 $sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit'";
 $resSub = mysql_query($sqlSub) or die(mysql_error());
@@ -141,8 +151,9 @@ while ($row = mysql_fetch_array($resSub)){
 	$Cre =  $row['sum(jumlah)'];
 }
 
-echo "<br /><b>Debit</b>(".$deb.") - <b>Credit</b>(".$Cre.")";
-echo "<br />Balance = ". ($deb - $Cre);
+echo "<br /><b>Debit</b>(".$debit.") - <b>Credit</b>(".$Cre.")";
+echo "<br />Baki = ". ($akaun + $debit - $Cre);
+echo "<br/>akaun syarikat = ". $akaun;
 ?>
 
 

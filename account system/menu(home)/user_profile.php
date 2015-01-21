@@ -13,8 +13,8 @@ die ("Error connecting to Database: ".$dbname);
 
 $i=$_SESSION['username'];
 $p=$_SESSION['pass'];
-$id=$_SESSION['id'];
-echo "<b>username</b> = ".$i ." and <b>id</b> = ". $id ." and <b>password</b> = ". $p;
+$link_id=$_SESSION['id'];
+echo "<b>username</b> = ".$i ." and <b>id</b> = ". $link_id ." and <b>password</b> = ". $p;
 ?>
 
 
@@ -38,6 +38,7 @@ echo "<b>username</b> = ".$i ." and <b>id</b> = ". $id ." and <b>password</b> = 
     <ul>
       	<li><a href="#">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
+        <li><a href="User_CheckTransaction.php">Check Transaction</a></li>
         <li><a href="#">Profile</a></li>
       	<li><a href="../logout.php">Log out</a></li>
 	</ul>
@@ -56,7 +57,7 @@ echo "<b>username</b> = ".$i ." and <b>id</b> = ". $id ." and <b>password</b> = 
 <?php
 
 
-$sql = "SELECT * FROM users WHERE username='" .$i. "' AND pass = '".$p."' AND id='" .$id. "'";
+$sql = "SELECT * FROM users WHERE id='" .$link_id. "'";
 $query = mysql_query($sql);
 while($call=mysql_fetch_array($query)){
 	

@@ -37,6 +37,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
     <ul>
       	<li><a href="#">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
+        <li><a href="User_CheckTransaction.php">Check Transaction</a></li>
         <li><a href="user_profile.php">Profile</a></li>
       	<li><a href="../logout.php">Log out</a></li>
 	</ul>

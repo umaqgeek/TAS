@@ -13,6 +13,7 @@ $jumlah=$_POST['jumlah'];
 $date=$_POST['date'];
 $time=$_POST['time'];
 $i=$_SESSION['username'];
+$p=$_SESSION['pass'];
 $link = $_SESSION['id'];
 $y= 'hello';
 	
@@ -33,12 +34,19 @@ $jam = date(" h/i/s A");
 	echo $now . $today . date('Y');
 	echo "<br/>week = ". date('W');
 	
-	
+
+$sqlbaki=mysql_query("SELECT Baki FROM setting");
+while($baki=mysql_fetch_array($sqlbaki)){
+	$akaun=$baki['Baki'];
+	}
+		
 $sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Debit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
-	$total =  $row['SUM(jumlah)'];
+	$debit =  $row['SUM(jumlah)'];
 }
+$total = $akaun + $debit;
+
 $sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit'";
 $resSub = mysql_query($sqlSub) or die(mysql_error());
 while ($row = mysql_fetch_array($resSub)){
@@ -49,15 +57,15 @@ while ($row = mysql_fetch_array($resSub)){
 
 $sum = $total - $Cre;
 
-$quantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
+$quantity = mysql_query("SELECT * FROM users WHERE username = '$i' AND pass = '" .$p. "' AND id = '" .$link. "' ");
 $q = mysql_fetch_array ($quantity);
 $quan = $q['quantity'];
 
-$weekQuantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
+$weekQuantity = mysql_query("SELECT * FROM users WHERE username = '$i' AND pass = '" .$p. "' AND id = '" .$link. "'");
 $wq = mysql_fetch_array ($weekQuantity);
 $QuanWeek = $wq['weekQuantity'];
 
-$dayQuantity = mysql_query("SELECT * FROM users WHERE username = '$i'");
+$dayQuantity = mysql_query("SELECT * FROM users WHERE username = '$i' AND pass = '" .$p. "' AND id = '" .$link. "'");
 $dq = mysql_fetch_array ($dayQuantity);
 $Quanday = $dq['dayQuantity'];
 
@@ -124,30 +132,30 @@ if($submit)
 					if($_POST['Jbayaran'] == "Debit"){
 						if($quan && $QuanWeek && $Quanday >= $jumlah){
 							$new = $quan - $_POST['jumlah'];
-							$sequal = "UPDATE users SET quantity = '$new' WHERE username = '$i'";
+							$sequal = "UPDATE users SET quantity = '$new' WHERE username = '$i' AND pass = '" .$p. "' AND id = '" .$link. "'";
 							$sets =  mysql_query ($sequal);
 							
 							$newWeek = $QuanWeek - $_POST['jumlah'];
-							$Sequalweek = "UPDATE users SET weekQuantity = '$newWeek' WHERE username = '$i'";
+							$Sequalweek = "UPDATE users SET weekQuantity = '$newWeek' WHERE username = '$i' AND pass = '" .$p. "' AND id = '" .$link. "'";
 							$SetWeek = mysql_query ($Sequalweek);
 							
 							$newday = $Quanday - $_POST['jumlah'];
-							$Sequalday = "UPDATE users SET dayQuantity = '$newday' WHERE username = '$i'";
+							$Sequalday = "UPDATE users SET dayQuantity = '$newday' WHERE username = '$i' AND pass = '" .$p. "' AND id = '" .$link. "'";
 							$SetDay = mysql_query ($Sequalday);
 							
 							
 							$_SESSION['auth']=true;
-							header ("Location: User_FormSend.php");
+							header ("Location: User_confirm 1st.php?msg=7");
 							exit();
 						}
 					 	else{
 							$_SESSION['auth']=true;
-							header ("Location: User_FormSend.php");
+							header ("Location: User_confirm 1st.php?msg=7");
 							exit();
 						}
 					}else{
 						$_SESSION['auth']=true;
-						header ("Location: User_FormSend.php");
+						header ("Location: User_confirm 1st.php?msg=7");
 						exit();
 					}
 				}
@@ -227,14 +235,13 @@ if($submit)
 <tr>
 <td>
 <select name="Jbank" id="select">
-<option><?php echo $_POST['Jbank']; ?></option>
-<option>Bank Islam</option>
-<option>Maybank</option>
-<option>AgroBank</option>
-<option>Bank Rakyat</option>
-<option>Tabung Haji</option>
-<option>CIMBank</option>
-<option>Bank Simpanan Berhad(BSN)</option>
+<option></option>
+<?php 
+$callJbank=mysql_query("SELECT * FROM jenis_bank");
+while($call=mysql_fetch_array($callJbank)){
+?>
+<option value="<?php echo $call['jenis_bank'] ?>"><?php echo $call['jenis_bank'] ?></option>
+<?php }?>
 </select>
 </td><br />
 </tr>

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 $dbhost = "localhost";
 $dbuser ="root";
@@ -25,9 +26,28 @@ if (isset($_POST['username'])){
 		exit();
 	}
 }
-	
-	
-	
+
+
+
+
+
+//---------------------------User login---------------------------------------------------------------------------------------	
+
+$set = '1';
+$sqlLimitM="SELECT * FROM setting WHERE id ='".$set."'";
+$resLimitM=mysql_query($sqlLimitM);
+while($Limit=mysql_fetch_array($resLimitM)){
+	$MonthLimit = $Limit['MonthLimit'];
+	$WeekLimit = $Limit['WeekLimit'];
+	$DayLimit = $Limit['DayLimit'];
+}
+
+
+
+
+
+
+
 if (isset($_POST['username'])){
 	$username = $_POST['username'];
 	$password = $_POST['password'];
@@ -60,7 +80,7 @@ if (isset($_POST['username'])){
 		header ("Location: menu(home)/User_home.php");
 	}
 	else{
-		$query= mysql_query ("UPDATE users SET month = '$today' , quantity = '30000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
+		$query= mysql_query ("UPDATE users SET month = '$today' , quantity = '".$MonthLimit."' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
@@ -75,7 +95,7 @@ if (isset($_POST['username'])){
 		$_SESSION['id'] = $row['id'];
 		header ("Location: menu(home)/User_home.php");
 	}else{
-		$Query= mysql_query ("UPDATE users SET week = '$latest' , weekQuantity = '10000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
+		$Query= mysql_query ("UPDATE users SET week = '$latest' , weekQuantity = '".$WeekLimit."' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
@@ -90,7 +110,7 @@ if (isset($_POST['username'])){
 		$_SESSION['id'] = $row['id'];
 		header ("Location: menu(home)/User_home.php");
 	}else{
-		$Query= mysql_query ("UPDATE users SET day = '$now' , dayQuantity = '5000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
+		$Query= mysql_query ("UPDATE users SET day = '$now' , dayQuantity = '".$DayLimit."' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['id'] = $row['id'];
 		header ("Location: menu(home)/User_home.php");
@@ -98,11 +118,6 @@ if (isset($_POST['username'])){
 	
 	if($log==$in){
 		$_SESSION['auth']=true;
-		$_SESSION['username']= $_POST['username'];
-		$_SESSION['pass'] = $_POST['password'];
-		header ("Location: menu(home)/User_home.php");
-	}else{
-		$Query= mysql_query ("UPDATE users SET in = '$in' , log = '3000' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
 		header ("Location: menu(home)/User_home.php");

@@ -14,6 +14,7 @@ die ("Error connecting to Database: ".$dbname);
 $i=$_SESSION['username'];
 $p=$_SESSION['pass'];
 $link=$_SESSION['id'];
+
 echo "<b>username</b> = ".$i ." and <b>id</b> = ". $link ." and <b>password</b> = ". $p;
 ?>
 
@@ -35,11 +36,11 @@ echo "<b>username</b> = ".$i ." and <b>id</b> = ". $link ." and <b>password</b> 
         
     <div>
     <ul>
-      	<li><a href="#">Home</a></li>
+      	<li><a href="User_home.php">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
         <li><a href="User_CheckTransaction.php">Check Transaction</a></li>
         <li><a href="user_profile.php">Profile</a></li>
-      	<li><a href="../logout.php">Log out</a></li>
+      	<li><a href=''>Log out</a></li>
 	</ul>
 	</div>
     <br />
@@ -56,44 +57,41 @@ echo "<b>username</b> = ".$i ." and <b>id</b> = ". $link ." and <b>password</b> 
 
 <?php
 $update = $_POST['update'];
-$SQL = "SELECT * FROM users WHERE id='" .$link. "'";
-$QUERY = mysql_query($SQL);
-while($edit=mysql_fetch_array($QUERY)){
-	$oldname = $edit['username']; 
-	$oldpass = $edit['pass'];
-	$oldFname = $edit['Fname'];
-	$oldic = $edit['ic'];
-	$oldtel = $edit['tel'];
-	$oldemail = $edit['email'];
-	$oldaddress = $edit['address'];
+if(isset($_GET['id'])){
+	$id= $_GET['id'];
+	$sqlGET=mysql_query("SELECT * FROM account WHERE id ='" .$id. "'");
+	while($row=mysql_fetch_array($sqlGET)){
+
+
+	$oldname = $row['name']; 
+	$oldJamaun = $row['Jamaun'];
+	$oldJbank = $row['Jbank'];
+	$oldjumlah = $row['jumlah'];
+	$oldperkara = $row['perkara'];
+	$oldtarikh = $row['tarikh'];
+	$oldmasa = $row['masa'];
+	$id = $row['id'];
+	
+	echo "hye ".$id;
+}
 }
 if ($update){
 	$newUsername = $_POST['name'];
-	$newpass = $_POST['pass'];
-	$newemail = $_POST['email'];
-	$newic = $_POST['ic'];
-	$newtel = $_POST['tel'];
-	$newfname = $_POST['fname'];
-	$newaddress = $_POST['address'];
+	$newJamaun = $_POST['Jamaun'];
+	$newJbank = $_POST['Jbank'];
+	$newjumlah = $_POST['jumlah'];
+	$newperkara = $_POST['perkara'];
+	$newtarikh = $_POST['tarikh'];
+	$newmasa = $_POST['masa'];
 	
-	mysql_query("update users set username='" .$newUsername. "', pass='" .$newpass. "', Fname='" .$newfname. "', ic='" .$newic. "', tel='" .$newtel. "', email='" .$newemail. "', address='" .$newaddress. "' where id='" .$link. "'");
+	mysql_query("update account set Jamaun='" .$newJamaun. "', Jbank='" .$newJbank. "', jumlah='" .$newjumlah. "', perkara='" .$newperkara. "' where id='" .$id. "'");
 	
-	
-	$passStr = "SELECT * FROM users WHERE id != '".$link."'";
-	$Str = mysql_query($passStr);
-	while($strength = mysql_fetch_array($Str)){
-		$strPass = $strength['pass'];
-	}
-	if($newpass == $strPass){
-		$_SESSION['auth']=true;
-		header ("Location: user_profile.php?msg=2");
-		exit();
-	}else{
+
 	$_SESSION['auth']=true;
-	header ("Location: user_profile.php");
+	header ("Location: User_CheckTransaction.php");
 	exit();
-	}
 }
+
 ?>
 
 <div>
@@ -103,56 +101,61 @@ if ($update){
 <tr>
 <td>username</td>
 <td>:</td>
-<td>
-<input type="text" name="name" value="<?php echo $oldname ?>" />
+<td><?php echo $oldname ?>
 </td>
 </tr>
 
 <tr>
-<td>Password</td>
+<td>Jenis Amaun</td>
 <td>:</td>
 <td>
-<input type="text" name="pass" value="<?php echo $oldpass ?>" />
+<input type="text" name="Jamaun" value="<?php echo $oldJamaun ?>" />
 </td>
 </tr>
 
 <tr>
-<td>Full Name</td>
+<td>Jenis Bank</td>
 <td>:</td>
 <td>
-<input type="text" name="fname" value="<?php echo $oldFname ?>" />
+<select name="Jbank" id="select" style="border-radius:1">
+<option></option>
+<?php 
+$callJbank=mysql_query("SELECT * FROM jenis_bank");
+while($call=mysql_fetch_array($callJbank)){
+?>
+<option value="<?php echo $call['jenis_bank'] ?>"><?php echo $call['jenis_bank'] ?></option>
+<?php }?>
+</select>
 </td>
 </tr>
 
 <tr>
-<td>I/C Number</td>
+<td>Jumlah</td>
 <td>:</td>
 <td>
-<input type="text" name="ic" value="<?php echo $oldic ?>" />
+<input type="text" name="jumlah" value="<?php echo $oldjumlah ?>" />
 </td>
 </tr>
 
 <tr>
-<td>Phone Number</td>
+<td>Perkara</td>
 <td>:</td>
 <td>
-<input type="text" name="tel" value="<?php echo $oldtel ?>" />
+<input type="text" name="perkara" value="<?php echo $oldperkara ?>" />
 </td>
 </tr>
 
 <tr>
-<td>E-mail</td>
+<td>Tarikh</td>
 <td>:</td>
-<td>
-<input type="text" name="email" value="<?php echo $oldemail ?>" />
+<td><?php echo $oldtarikh ?>
 </td>
 </tr>
 
 <tr>
-<td>Address</td>
+<td>Masa</td>
 <td>:</td>
-<td>
-<input type="text" width="" height="" name="address" value="<?php echo $oldaddress ?>" />
+<td><?php echo $oldmasa ?>
 </td></tr>
 
 

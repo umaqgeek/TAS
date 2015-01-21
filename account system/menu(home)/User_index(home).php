@@ -47,6 +47,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
     <ul>
       	<li><a href="User_home.php">Home</a></li>
         <li><a href="User_index(home).php">Account Form</a></li>
+        <li><a href="User_CheckTransaction.php">Check Transaction</a></li>
         <li><a href="user_profile.php">Profile</a></li>
       	<li><a href="../logout.php">Log out</a></li>
 	</ul>
@@ -92,13 +93,12 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 <td>
 <select name="Jbank" id="select">
 <option></option>
-<option>Bank Islam</option>
-<option>Maybank</option>
-<option>AgroBank</option>
-<option>Bank Rakyat</option>
-<option>Tabung Haji</option>
-<option>CIMBank</option>
-<option>Bank Simpanan Berhad(BSN)</option>
+<?php 
+$callJbank=mysql_query("SELECT * FROM jenis_bank");
+while($call=mysql_fetch_array($callJbank)){
+?>
+<option value="<?php echo $call['jenis_bank'] ?>"><?php echo $call['jenis_bank'] ?></option>
+<?php }?>
 </select>
 </td><br />
 </tr>
@@ -142,61 +142,11 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 </form>
 </div>
 
-<?php
 
-$call = mysql_query("SELECT * FROM account WHERE name='" .$i. "' AND id='" .$id. "'");
-while($calling = mysql_fetch_array($call)){
-	$name = $calling['name'];
-	$Jamaun = $calling['Jamaun'];
-	$Jbank = $calling['Jbank'];
-	$date = $calling['tarikh'];
-	$masa = $calling['masa'];
-	$perkara = $calling['perkara'];
-	$status = $calling['semak'];
-	$jumlah = $calling['jumlah'];
-	}
-	
-echo "<table align='right'>";
-echo "<tr>";
-echo "<td>Masa : </td>";
-echo "<td>". $masa."</td></tr>";
-
-echo "<tr>";
-echo "<td>Tarikh : </td>";
-echo "<br/><td>". $date."</td></tr>";
-
-echo "<tr>";
-echo "<td>Nama : </td>";
-echo "<br/><td>". $name."</td></tr>";
-
-echo "<tr>";
-echo "<td>Jenis Amaun : </td>";
-echo "<br/><td>". $Jamaun."</td></tr>";
-
-echo "<tr>";
-echo "<td>Jenis Bank : </td>";
-echo "<br/><td>". $Jbank."</td></tr>";
-
-echo "<tr>";
-echo "<td>Perkara : </td>";
-echo "<br/><td>". $perkara."</td></tr>";
-
-echo "<tr>";
-echo "<td>Jumlah : </td>";
-echo "<br/><td>". $jumlah."</td></tr>";
-
-echo "<tr>";
-echo "<td>Status : </td>";
-echo "<br/><td>". $status."</td>";
-echo "</tr>";
-echo "</table>";
-
-
-?>
 
 <?php
 
-$query = "SELECT Jamaun, COUNT(name), SUM(jumlah) FROM account WHERE name='" .$i. "' AND id='".$id."' GROUP BY Jamaun "; 
+$query = "SELECT Jamaun, COUNT(name), SUM(jumlah) FROM account WHERE name='" .$i. "' AND link_id='".$id."' GROUP BY Jamaun "; 
 $result = mysql_query($query) or die(mysql_error());
 
 // Print out result from user amount transacation
@@ -207,13 +157,20 @@ while($row = mysql_fetch_array($result)){
 }
 
 //total account balance - total user debit
+$sqlbaki=mysql_query("SELECT Baki FROM setting");
+while($baki=mysql_fetch_array($sqlbaki)){
+	$akaun=$baki['Baki'];
+	}
+
 $sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Debit'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
-	$deb =  $row['SUM(jumlah)'];
+	$debit =  $row['SUM(jumlah)'];
 }
 
-$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit' and name = '" .$i. "' AND id='".$id."'";
+$deb = $debit + $akaun;
+
+$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit' and name = '" .$i. "' AND link_id='".$id."'";
 $resSub = mysql_query($sqlSub) or die(mysql_error());
 while ($row = mysql_fetch_array($resSub)){
 	$Cre =  $row['sum(jumlah)'];

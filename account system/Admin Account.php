@@ -50,6 +50,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == "true"){
 <li><a href="index_register.php">User Registration</a></li>
 <li><a href="register.php">User Account</a></li>
 <li><a href="Admin_home.php">Report</a></li>
+<li><a href="Admin Manage User/setting.php">Setting</a></li>
 <li><a href="logout.php">Logout</a></li></ul>
 </nav>
 </div><!--Nav-->

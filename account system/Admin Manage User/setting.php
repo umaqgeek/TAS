@@ -37,8 +37,41 @@ if ($update){
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="../css/susun_menu.css">
+<link rel="stylesheet" href="../css/lay_menu.css">
 </head>
-<body>
+<body bgcolor="#CCCCCC">
+
+<img src="../tuffahlogo.png" />
+
+
+
+<div id="container">
+
+<div id="Header"><h1><b>Tuffah Account Management System</b></h1>
+</div>
+
+<div id="Nav">
+
+<nav>
+<ul>
+<li><a href="../Admin Account.php">Home</a></li>
+<li><a href="../index_register.php">User Registration</a></li>
+<li><a href="../register.php">User Account</a></li>
+<li><a href="../Admin_home.php">Report</a></li>
+<li><a href="setting.php">Setting</a></li>
+<li><a href="logout.php">Logout</a></li></ul>
+</nav>
+</div><!--Nav-->
+
+
+
+
+
+</div><!--container-->
+<br/><br/><br/><br/>
+
+
 <table>
 <tr>
 

@@ -33,97 +33,187 @@ if ($update){
 ?>
 
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<!DOCTYPE html>
-<html>
 <head>
-<link rel="stylesheet" href="../css/susun_menu.css">
-<link rel="stylesheet" href="../css/lay_menu.css">
+
+<link rel="stylesheet" href="../css/style.css" />
+	<!-- Stylesheets -->
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
+	<link rel="stylesheet" href="css/style.css">
+	
+	<!-- Optimize for mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+	<!-- jQuery & JS files -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="js/script.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Admin</title>
+
 </head>
-<body bgcolor="#CCCCCC">
 
-<img src="../tuffahlogo.png" />
-
-
-
-<div id="container">
-
-<div id="Header"><h1><b>Tuffah Account Management System</b></h1>
-</div>
-
-<div id="Nav">
-
-<nav>
-<ul>
-<li><a href="../Admin Account.php">Home</a></li>
-<li><a href="../index_register.php">User Registration</a></li>
-<li><a href="../register.php">User Account</a></li>
-<li><a href="../Admin_home.php">Report</a></li>
-<li><a href="setting.php">Setting</a></li>
-<li><a href="logout.php">Logout</a></li></ul>
-</nav>
-</div><!--Nav-->
+<body>
+  
 
 
+	<!-- TOP BAR -->
+	<div id="top-bar">
+		
+		<div class="page-full-width cf">
+
+			<ul id="nav" class="fl">
+	
+				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong>admin</strong></a>
+					<ul>
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">Settings</a></li>
+						<li><a href="change password.php">Change Password</a></li>
+						<li><a href="../logout.php">Log out</a></li>
+					</ul> 
+				</li>
+			
+				<li><a href="#" class="round button dark menu-email-special image-left">Home</a></li>
+                <li><a href="../Admin Account.php" class="round button dark menu-email-special image-left">Account Report</a></li>
+				<li><a href="register.php" class="round button dark menu-email-special image-left">Staff Table</a></li>
+                <li><a href="../logout.php" class="round button dark menu-logoff image-left">Log out</a></li>
+				
+			</ul> <!-- end nav -->
+
+					
+			<form action="#" method="POST" id="search-form" class="fr">
+				<fieldset>
+					<input type="text" id="search-keyword" class="round button dark ic-search image-right" placeholder="Search..." />
+					<input type="hidden" value="SUBMIT" />
+				</fieldset>
+			</form>
+
+		</div> <!-- end full-width -->	
+	
+	</div> <!-- end top-bar (search bar) -->
+	
+	
+	
+	<!-- HEADER -->
+	<div id="header-with-tabs">
+		
+		<div class="page-full-width cf">
+	
+			<ul id="tabs" class="fl">
+				<li><a href="dashboard.html" class="active-tab dashboard-tab">Dashboard</a></li>
+			</ul> <!-- end tabs -->
+			
+			<!-- Change this image to your own company's logo -->
+			<!-- The logo will automatically be resized to 30px height. -->
+			<a href="#" id="company-branding-small" class="fr"><img src="../tuffahlogo.png" alt="Tuffah Informatic" /></a>
+			
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->
+
+<!--jumlah account------------------------------------------------>
+	
+<?php
+            $query = "SELECT Jamaun, COUNT(name), SUM(jumlah) FROM account GROUP BY Jamaun"; 
+$result = mysql_query($query) or die(mysql_error());
+
+// Print out result
+while($row = mysql_fetch_array($result)){
+	//echo "- There are ". $row['COUNT(name)'] ." ". $row['Jamaun'] ."<br/> And ". $row['Jamaun']. " = RM". $row['SUM(jumlah)'] ;
+	//echo "<br />";
+
+}
 
 
+$sqlbaki=mysql_query("SELECT Baki FROM setting");
+while($baki=mysql_fetch_array($sqlbaki)){
+	$akaun=$baki['Baki'];
+	}
+	
 
-</div><!--container-->
-<br/><br/><br/><br/>
+$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Debit'"; 
+$resSum = mysql_query($sqlSum) or die(mysql_error());
+while ($row = mysql_fetch_array($resSum)){
+	$debit =  $row['SUM(jumlah)'];
+}
 
-
-<table>
-<tr>
-
-
-<hr/>
-<form action="" method="POST" class="table">
-<table>
-<h3><b>tetapan limit transfer</b></h3>
-<tr>
-<td>Limit Per Month</td>
-<td>:</td>
-<td>
-<input type="text" name="Month" value="<?php echo $oldLimitMonth ?>" />
-</td>
-</tr>
-
-<tr>
-<td>Limit Per Week</td>
-<td>:</td>
-<td>
-<input type="text" name="Week" value="<?php echo $oldLimitWeek ?>" />
-</td>
-</tr>
-
-<tr>
-<td>Limit Per Day</td>
-<td>:</td>
-<td>
-<input type="text" name="Day" value="<?php echo $oldLimitDay ?>" />
-</td>
-</tr>
-
-<tr>
-<td colspan="2" align="left">
-<input type="submit" name="update" value="Finish" />
-</td>
-<td>
-<input type="reset" value="Reset" />
-</td>
-</tr>
-
-</table>
-
-</form>
+$deb = $debit + $akaun;
 
 
+$sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit'";
+$resSub = mysql_query($sqlSub) or die(mysql_error());
+while ($row = mysql_fetch_array($resSub)){
+	$Cre =  $row['sum(jumlah)'];
+}
 
+// echo "<br /><b>Debit</b>(".$debit.") - <b>Credit</b>(".$Cre.")";
+// echo "<br />Baki = ". ($akaun + $debit - $Cre);
+// echo "<br/>akaun syarikat = ". $akaun;
+?>	
+	
+	<!-- MAIN CONTENT -->
+	<div id="content">
+		
+		<div class="page-full-width cf">
 
-</tr>
-<tr>
+			<div class="side-menu fl">
+				
+				<h3>Side Menu</h3>
+				<ul>
+					<li><a href="#">Side menu link</a></li>
+					<li><a href="#">Another link</a></li>
+					<li><a href="#">A third link</a></li>
+					<li><a href="#">Fourth link</a></li>
+                    
+				</ul>
+				<div style="background-color:#FFF"><p>Debit ( <?php echo $debit; ?> ) - Credit ( <?php echo $Cre ?> )<br/>
+                    	Baki dalam <br /> akaun syarikat = <?php echo ($akaun + $debit - $Cre) ?></p></div>
+			</div> <!-- end side-menu -->
+			
 
+<!---------------------------------------------------setting transfer limit----------------------------------------->           
+			<div class="side-content fr">
+			
+				<div class="content-module">
+				
+					<div class="content-module-heading cf">
+					
+						<h3 class="fl"><b>setting transfer limit</b></h3>
+						<span class="fr expand-collapse-text">Click to collapse</span>
+						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+					
+					</div> <!-- end content-module-heading -->
+                    <br/>
+		<fieldset>
+	<div align="center">
+	<form action='' method='post'>
+	
+	<p>
+	<label><b>Limit Per Month</b></label>
+	<input id='simple-input' class='round default-width-input' type='text' type='text' name='Month' value="<?php echo $oldLimitMonth ?>">
+	</p>
+	
+	<p>
+	<label><b>Limit Per Week</b></label>
+	<input id='simple-input' class='round default-width-input' type='text' type='text' name='Week' value="<?php echo $oldLimitWeek ?>">
+	</p>
+	
+	<p>
+	<label><b>Limit Per Day</b></label>
+	<input id='simple-input' class='round default-width-input'  type='text' name='Day' value="<?php echo $oldLimitDay ?>">";
+	</p>
+	
+	<input type='submit' value='update' name='update' class='round blue ic-right-arrow' />
+	</form>
+	</div><!-- end half-size-column -->
+	</fieldset>			
+	<br/><br/><br/>				
+				
 
+				
+ <!------------------------------------setting account balance------------------------------------------->
 <?php
 
 $set = '1';
@@ -144,36 +234,34 @@ if ($ubah){
 }
 
 ?>
-<hr/>
-<form action="" method="POST" class="table">
-<table>
-<h3><b>Akaun Syarikat</b></h3>
-<tr>
-<td>Akaun bulan ini</td>
-<td>:</td>
-<td>
-<input type="text" name="Baki" value="<?php echo $oldBaki ?>" />
-</td>
-</tr>
 
-<tr>
-<td colspan="2" align="left">
-<input type="submit" name="ubah" value="Finish" />
-</td>
-<td>
-<input type="reset" value="Reset" />
-</td>
-</tr>
-
-</table>
-
-</form>
-
-
-</tr>
-<tr>
-
-<hr/>
+					<div class="content-module-heading cf">
+					
+						<h3 class="fl"><b>setting account balance</b></h3>
+						<span class="fr expand-collapse-text">Click to collapse</span>
+						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+					
+					</div> <!-- end content-module-heading -->
+                    <br/>
+		<fieldset>
+        <div align="center">
+	<form action='' method='post'>
+	
+	
+	<p>
+	<label><b>Akaun bulan ini</b></label>
+	<input id='simple-input' class='round default-width-input' type='text' type='text' name="Baki" value="<?php echo $oldBaki ?>">
+	</p>
+	
+	
+	
+	<input type='submit' value='update' name="ubah" class='round blue ic-right-arrow' />
+	</form>
+    </div><!-- end half-size-column -->
+	</fieldset>			
+	<br/><br/><br/>	
+			
+ <!--------------------------------------------setting jenis bank------------------------------------------------>
 <?php
 $value=$_POST['value'];
 $submit=$_POST['send'];
@@ -192,41 +280,56 @@ if($submit){
 }
 
 ?>
-<form action="" method="post">
+
+
+					<div class="content-module-heading cf">
+					
+						<h3 class="fl"><b>setting up type of bank for user make a transfer</b></h3>
+						<span class="fr expand-collapse-text">Click to collapse</span>
+						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
+					
+					</div> <!-- end content-module-heading -->
+                    <br/>
+		<fieldset>
+        <div align="center">
+	<form action='' method='post'>
+	
+	
+	<p>
+	<label><b>Tambah jenis Bank</b></label>
+	<input id='simple-input' class='round default-width-input' type='text' type='text' name="value">
+	</p>
+	
+	
+	
+	<input type='submit' name="send" value="Tambah" class='round blue ic-right-arrow' />
+	</form>
+    </div><!-- end half-size-column -->
+	</fieldset>			
+	<br/><br/><br/>	
+    
+    
+    <table>
+
 <table>
-<h3><b>Tetapan Jenis Bank untuk user buat transaksi</b></h3>
 <tr>
-<td>Tambah jenis Bank</td>
-<td>:</td>
-<td><input type="text" name="value"></td>
-</tr>
-
-<tr>
-<td align="left" colspan="3"><input type="submit" name="send" value="Tambah"></td>
-</tr>
-</table>
-</form>
-
-
-<table>
-
-<table>
-<tr>
+<td><b>no</b></td>
 <td><b>Jenis Bank</b></td>
-<td></td>
-<td></td>
+<td colspan="2"><b>action</b></td>
 </tr>
 <?php
-
+$i = 1;
 $SQL = "SELECT * FROM jenis_bank";
 $QUERY = mysql_query($SQL);
 	while($row=mysql_fetch_array($QUERY)){
 		$type=$row['id'];
 		echo "<tr>";
+		echo "<td>".$i."</td>";
 		echo "<td>".$row['jenis_bank']."</td>";
 		echo'<td><a href="setting.php?id='.$type.'">Edit</a></td>';
 		echo'<td><a href="delete(jenis bank).php?id='.$type.'">Padam</a></td>';
 		echo "</tr>";
+		$i++;
 	}
 
 ?>
@@ -263,9 +366,29 @@ $QUERY = mysql_query($SQL);
 ?>
 
 </table>
+			
+</div></div>
+<!-------------------------------------------php untuk edit staf------------------------------------>               
+                        
+					
 
 
-</tr>
-</table>
+		
+			</div> <!-- end side-content -->
+		
+		</div> <!-- end full-width -->
+			
+	</div> <!-- end content -->
+	
+	
+	
+<!-- FOOTER -->
+	<div id="footer">
+
+		<p>&copy; Copyright 2015 <a href="#">Tuffah Informatic, @</a>. All rights reserved.</p>
+		<p><strong>Account System</strong> theme by <a href="http://www.buzzlee199@yahoo.com">buzzlee199@yahoo.com</a></p>
+	
+	</div> <!-- end footer -->
+
 </body>
 </html>

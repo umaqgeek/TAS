@@ -53,8 +53,8 @@ $link=$_SESSION['id'];
 	
 				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong>Staff</strong></a>
 					<ul>
-						<li><a href="#">My Profile</a></li>
-						<li><a href="change pass.php">Change Password</a></li>
+						<li><a href="user_editProfile.php">My Profile</a></li>
+						<li><a href="#">Change Password</a></li>
 						<li><a href="../logout.php">Log out</a></li>
 					</ul> 
 				</li>
@@ -110,7 +110,8 @@ $link=$_SESSION['id'];
 					<li><a href="#">A third link</a></li>
 					<li><a href="#">Fourth link</a></li>
 				</ul>
-<h3 style="color:white">Info transaction</h3>
+                
+                <h3 style="color:white">Info transaction</h3>
 <ul style='background:white'>
 <?php
 
@@ -186,25 +187,21 @@ while ($day = mysql_fetch_array($D)){
 }
 ?>
 </ul></div><!--side-menu fl-->
+    
+	
             
 
 <!--tgk detail profile ------------>
 <?php
 
 
-$prof = "SELECT * FROM users WHERE id='" .$link. "'";
-$file = mysql_query($prof);
-while($call=mysql_fetch_array($file)){
+$change = "SELECT * FROM users WHERE id='".$link."'";
+$word = mysql_query($change);
+while($call=mysql_fetch_array($word)){
 	
-	$me = $call['id'];
+	$id = $call['id'];
 	$username = $call['username'];
 	$pass = $call['pass'];
-	$Fullname = $call['Fname'];
-	$email = $call['email'];
-	$ic = $call['ic'];
-	$tel = $call['tel'];
-	$address = $call['address'];
-	$ubah = $_POST['Edit'];
 
 }
 
@@ -214,7 +211,7 @@ while($call=mysql_fetch_array($file)){
 				
 					<div class="content-module-heading cf">
 					
-						<h3 class="fl">Profile</h3>
+						<h3 class="fl">Change Password</h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 
@@ -236,31 +233,8 @@ while($call=mysql_fetch_array($file)){
             <label>Password</label><?php echo $pass ?>
 			</p>
             
-            <p>
-			<label>Full Name</label><?php echo $Fullname ?>
-			</p>
-            
-            <p>
-			<label>I/C Number</label><?php echo $ic ?>
-			</p>
-            
-	</div><!--half-size-column fl-->
-    <div class="half-size-column fr">
-
-			<p>
-			<label>Phone Number</label><?php echo $tel ?>
-			</p>
-            
-            <p>
-			<label>E-mail</label><?php echo $email ?>
-			</p>
-            
-            <p>
-			<label>Address</label><?php echo $address ?>
-			</p>
-
 			<?php echo '
-			<a href="user_editProfile.php?id='.$me.'"; ?><input type="button" name="Edit" value="Edit" class="round blue ic-right-arrow" /></a>';
+			<a href="change pass.php?id='.$id.'"; ?><input type="button" name="Edit" value="Edit" class="round blue ic-right-arrow" /></a>';
 			?>
 			
 	</div><!--half-size-column fl-->
@@ -276,16 +250,11 @@ while($call=mysql_fetch_array($file)){
 $update = $_POST['update'];
 if(isset($_GET['id'])){
 	$ip= $_GET['id'];
-$SQL = "SELECT * FROM users WHERE id='" .$ip. "'";
+$SQL = "SELECT * FROM users where id='".$ip."'";
 $QUERY = mysql_query($SQL);
 while($edit=mysql_fetch_array($QUERY)){
 	$oldname = $edit['username']; 
 	$oldpass = $edit['pass'];
-	$oldFname = $edit['Fname'];
-	$oldic = $edit['ic'];
-	$oldtel = $edit['tel'];
-	$oldemail = $edit['email'];
-	$oldaddress = $edit['address'];
 
 
 echo "<div class='side-content fr'>";
@@ -304,34 +273,6 @@ echo "<fieldset>";
             echo "<label>Password</label>";
 			echo "<input name='pass' id='simple-input' class='round default-width-input'  type='text' value='$oldpass' />";
 			echo "</p>";
-            
-            echo "<p>";
-			echo "<label>Full Name</label>";
-			echo "<input name='fname' id='simple-input' class='round default-width-input'  type='text' value='$oldFname' />"; 
-			echo "</p>";
-            
-            echo "<p>";
-			echo "<label>I/C Number</label>";
-			echo "<input name='ic' id='simple-input' class='round default-width-input'  type='text' value='$oldic'  />";
-			echo "</p>";
-            
-	echo "</div>"; //--half-size-column fl-->
-    echo "<div class='half-size-column fr'>";
-
-			echo "<p>";
-			echo "<label>Phone Number</label>";
-			echo "<input name='tel' id='simple-input' class='round default-width-input'  type='text' value='$oldtel'  />";
-			echo "</p>";
-            
-            echo"<p>";
-			echo "<label>E-mail</label>";
-			echo "<input name='email' id='simple-input' class='round default-width-input'  type='text' value='$oldemail'  />";
-			echo "</p>";
-            
-            echo "<p>";
-			echo "<label>Address</label>";
-			echo "<input name='address' id='simple-input' class='round default-width-input'  type='text' value='$oldaddress'  />";
-			echo "</p>";
 
 			echo "<input type='submit' name='update' value='Finish' class='round blue ic-right-arrow' />";
 			echo "<input type='reset' value='Reset' class='round blue ic-right-arrow' />";
@@ -347,27 +288,22 @@ echo "</div>";//<!--side-content fr-->
 if ($update){
 	$newUsername = $_POST['name'];
 	$newpass = $_POST['pass'];
-	$newemail = $_POST['email'];
-	$newic = $_POST['ic'];
-	$newtel = $_POST['tel'];
-	$newfname = $_POST['fname'];
-	$newaddress = $_POST['address'];
 	
-	mysql_query("update users set username='" .$newUsername. "', pass='" .$newpass. "', Fname='" .$newfname. "', ic='" .$newic. "', tel='" .$newtel. "', email='" .$newemail. "', address='" .$newaddress. "' where id='" .$link. "'");
+	mysql_query("update users set username='" .$newUsername. "', pass='" .$newpass. "'");
 	
 	
-	$passStr = "SELECT * FROM users WHERE id != '".$link."'";
+	$passStr = "SELECT * FROM users";
 	$Str = mysql_query($passStr);
 	while($strength = mysql_fetch_array($Str)){
 		$strPass = $strength['pass'];
 	}
 	if($newpass == $strPass){
 		$_SESSION['auth']=true;
-		header ("Location: user_editProfile.php?msg=2");
+		header ("Location: change pass.php?msg=2");
 		exit();
 	}else{
 	$_SESSION['auth']=true;
-	header ("Location: user_editProfile.php");
+	header ("Location: change pass.php");
 	exit();
 	}
 }
@@ -376,8 +312,25 @@ if ($update){
 
 
 
+</body>
+</html>
+</body>
+</html>
+
 
 	</div><!--page-full-width cf-->
 </div>
+
+
+
+<!-- FOOTER -->
+	<div id="footer">
+
+		<p>&copy; Copyright 2015 <a href="#">Tuffah Informatic, @</a>. All rights reserved.</p>
+		<p><strong>Account System</strong> theme by <a href="http://www.buzzlee199@yahoo.com">buzzlee199@yahoo.com</a></p>
+	
+	</div> <!-- end footer -->
+
+
 </body>
 </html>

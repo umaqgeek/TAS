@@ -77,7 +77,7 @@ if (isset($_POST['username'])){
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
 		$_SESSION['id'] = $row['id'];
-		header ("Location: menu(home)/User_home.php");
+		header ("Location: menu(home)/User_CheckTransaction.php");
 	}
 	else{
 		$query= mysql_query ("UPDATE users SET month = '$today' , quantity = '".$MonthLimit."' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
@@ -85,7 +85,7 @@ if (isset($_POST['username'])){
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
 		$_SESSION['id'] = $row['id'];
-		header ("Location: menu(home)/User_home.php");
+		header ("Location: menu(home)/User_CheckTransaction.php");
 	}
 		
 	if($week==$latest){
@@ -93,14 +93,14 @@ if (isset($_POST['username'])){
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
 		$_SESSION['id'] = $row['id'];
-		header ("Location: menu(home)/User_home.php");
+		header ("Location: menu(home)/User_CheckTransaction.php");
 	}else{
 		$Query= mysql_query ("UPDATE users SET week = '$latest' , weekQuantity = '".$WeekLimit."' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
 		$_SESSION['id'] = $row['id'];
-		header ("Location: menu(home)/User_home.php");
+		header ("Location: menu(home)/User_CheckTransaction.php");
 	}
 		
 	if($day==$now){
@@ -108,19 +108,19 @@ if (isset($_POST['username'])){
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
 		$_SESSION['id'] = $row['id'];
-		header ("Location: menu(home)/User_home.php");
+		header ("Location: menu(home)/User_CheckTransaction.php");
 	}else{
 		$Query= mysql_query ("UPDATE users SET day = '$now' , dayQuantity = '".$DayLimit."' WHERE username='".$username."' AND pass='".$password."' LIMIT 1");  
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['id'] = $row['id'];
-		header ("Location: menu(home)/User_home.php");
+		header ("Location: menu(home)/User_CheckTransaction.php");
 	}
 	
 	if($log==$in){
 		$_SESSION['auth']=true;
 		$_SESSION['username']= $_POST['username'];
 		$_SESSION['pass'] = $_POST['password'];
-		header ("Location: menu(home)/User_home.php");
+		header ("Location: menu(home)/User_CheckTransaction.php");
 	}
 }
 else{

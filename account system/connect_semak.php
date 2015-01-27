@@ -11,5 +11,5 @@ mysql_select_db($db);
 				SET semak = 'Disemak' 
 				WHERE id = $ID");
 	echo "Your Application has been Approved";
-	Header("Location: Admin_home.php");
+	Header("Location: Admin Account.php");
 ?>

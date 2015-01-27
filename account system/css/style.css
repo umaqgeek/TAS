@@ -281,28 +281,51 @@ p a, p a:hover { border-bottom: 1px dotted; }
 
 
 /* ---------- FORMS ---------- */
-form label {
+label {
 	display: block;
 	text-transform: uppercase;
 	color: #2a2e36;
 	margin: 0 0 0.3125em 0;
 }
 
-form label.alt-label { text-transform: none; }
+label.alt-label { text-transform: none; }
 
-form input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="password"], textarea {
 	border: 1px solid #d9dbdd;
 	padding: 1em 0.625em; /* 16/16 10/16 */
 	outline: none;
 }
-	form input[type="text"]:hover, input[type="password"]:hover, textarea:hover,
-	form input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+	input[type="text"]:hover, input[type="password"]:hover, textarea:hover,
+	input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 		border: 1px solid #bbbdbe;
 	}
 	
-form input[type="checkbox"], form input[type="radio"] { margin-right: 0.833em; /* 10/12 */ }
+div form input[type="checkbox"], form input[type="radio"] { margin-right: 0.833em; /* 10/12 */ }
 
-form input[type="submit"] {
+div form input[type="submit"] {
+	border: none;
+	cursor: pointer;
+	padding: 0.833em; /* 10/12 */
+
+	background-position: right center;
+	padding-right: 3em; /* 36/12 */
+	background-repeat: no-repeat;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+div form input[type="reset"] {
+	border: none;
+	cursor: pointer;
+	padding: 0.833em; /* 10/12 */
+
+	background-position: right center;
+	padding-right: 3em; /* 36/12 */
+	background-repeat: no-repeat;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+div form input[type="button"] {
 	border: none;
 	cursor: pointer;
 	padding: 0.833em; /* 10/12 */

@@ -20,7 +20,12 @@ $link=$_SESSION['id'];
 
 ?>
 
-
+<?php
+$L=mysql_query("SELECT * FROM setting");
+while($fuhh=mysql_fetch_array($L)){
+	$fuhh['MonthLimit'];
+}
+?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -146,7 +151,6 @@ while ($row = mysql_fetch_array($resSum)){
 	$debit =  $row['SUM(jumlah)'];
 }
 
-$deb = $debit + $akaun;
 
 $sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit' and name = '".$me."' AND link_id='".$link."'";
 $resSub = mysql_query($sqlSub) or die(mysql_error());
@@ -154,8 +158,13 @@ while ($row = mysql_fetch_array($resSub)){
 	$Cre =  $row['sum(jumlah)'];
 }
 
+$deb = $debit + $akaun;
+$balance = $deb - $Cre;
+
+//echo $deb ."-" .$Cre ."=". $balance;
 echo "<li><p><b>Total balance from <br/> account = </b>".$deb." <br/> <b>Credit from you = </b>".$Cre."";
-echo "<br />Balance = ". ($deb - $Cre)."</p></li>";
+echo "<br/>Balance in company account ".$akaun;
+echo "<br />Total Balance = ".$balance."</p></li>";
 
 
 
@@ -477,7 +486,7 @@ if($submit)
 			exit();
 		}
 		
-		else if($jumlah > 3000){
+		else if($jumlah > $akaun){
 			$_SESSION['auth']=true;
 			header ("Location: User_CheckTransaction.php?msg=6");
 			exit();
@@ -485,7 +494,7 @@ if($submit)
 		else if($_POST['Jamaun'] == "Debit" && $monthQuantity < $jumlah){
 			echo "Sorry lah derrr dah limit..";
 			$_SESSION['auth']=true;
-			header ("Location: CheckTransaction.php?msg=1");
+			header ("Location: User_CheckTransaction.php?msg=1");
 			exit();
 		}else if($_POST['Jamaun'] == "Debit" && $weekQuantity < $jumlah){
 			echo "Sorry lah derrr dah limit..";
@@ -495,14 +504,14 @@ if($submit)
 		}else if($_POST['Jamaun'] == "Debit" && $dayQuantity < $jumlah){
 			echo "Sorry lah derrr dah limit..";
 			$_SESSION['auth']=true;
-			header ("Location: CheckTransaction.php?msg=3");
+			header ("Location: User_CheckTransaction.php?msg=3");
 			exit();
 		}
 		
-		else if($_POST['Jamaun'] == "Kredit" && $deb < $jumlah){
+		else if($_POST['Jamaun'] == "Kredit" && $jumlah > $balance){
 			echo "Sorry lah derrr baki account tidak mencukupi untuk buat pengeluaran..";
 			$_SESSION['auth']=true;
-			header ("Location: CheckTransaction.php?msg=4");
+			header ("Location: User_CheckTransaction.php?msg=4");
 			exit();
 		}
 		else{
@@ -581,7 +590,7 @@ if (isset($_GET['msg']))
 	if($message == 5)
 	echo "<span style='color:red;'>Sila semak form anda</span>";
 	if($message == 6)
-	echo "<span style='color:red;'>Sorry lah derrr setiap transaksi hanya boleh dibuat kurang dari rm3000..</span>";
+	echo "<span style='color:red;'>Sorry lah derrr setiap transaksi hanya boleh dibuat kurang dari RM ".$akaun." sekali</span>";
 	if($message == 7)
 	echo "<span style='color:green;'>Congrates!!!</span>";
 }
@@ -605,7 +614,7 @@ if (isset($_GET['msg']))
 	</p>
 	
 	<p>
-	<label><b>Amount</b></label>
+	<label><b>Amount (RM)</b></label>
 	<input id='simple-input' class='round default-width-input' type='text' type='text' name='jumlah'>
 	</p>
 	

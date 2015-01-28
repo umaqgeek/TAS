@@ -20,13 +20,6 @@ $link=$_SESSION['id'];
 
 ?>
 
-<?php
-$L=mysql_query("SELECT * FROM setting");
-while($fuhh=mysql_fetch_array($L)){
-	$fuhh['MonthLimit'];
-}
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -75,12 +68,7 @@ while($fuhh=mysql_fetch_array($L)){
 			</ul> <!-- end nav -->
 
 					
-			<form action="#" method="POST" id="search-form" class="fr">
-				<fieldset>
-					<input type="text" id="search-keyword" class="round button dark ic-search image-right" placeholder="Search..." />
-					<input type="hidden" value="SUBMIT" />
-				</fieldset>
-			</form>
+
 
 		</div> <!-- end full-width -->	
 	
@@ -145,7 +133,7 @@ while($baki=mysql_fetch_array($sqlbaki)){
 	$akaun=$baki['Baki'];
 	}
 
-$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Debit'"; 
+$sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Debit' AND name='".$me."'"; 
 $resSum = mysql_query($sqlSum) or die(mysql_error());
 while ($row = mysql_fetch_array($resSum)){
 	$debit =  $row['SUM(jumlah)'];
@@ -482,7 +470,7 @@ if($submit)
 		{
 			echo "Sorry, sender must be own of this account\n\n";
 			$_SESSION['auth']=true;
-			header ("Location: User_confirm 1st.php?msg=0");
+			header ("Location: User_CheckTransaction.php?msg=0");
 			exit();
 		}
 		
@@ -499,7 +487,7 @@ if($submit)
 		}else if($_POST['Jamaun'] == "Debit" && $weekQuantity < $jumlah){
 			echo "Sorry lah derrr dah limit..";
 			$_SESSION['auth']=true;
-			header ("Location: CheckTransaction.php?msg=2");
+			header ("Location: User_CheckTransaction.php?msg=2");
 			exit();
 		}else if($_POST['Jamaun'] == "Debit" && $dayQuantity < $jumlah){
 			echo "Sorry lah derrr dah limit..";
@@ -523,16 +511,15 @@ if($submit)
 				if ($retval)
 				{
 					if($_POST['Jamaun'] == "Debit"){
-						if($quan && $QuanWeek && $Quanday >= $jumlah){
-							$new = $quan - $_POST['jumlah'];
-							$sequal = "UPDATE users SET quantity = '".$new."' WHERE username = '".$me."' AND pass = '".$p."' AND id = '".$link."'";
+						if($monthQuantity && $weekQuantity && $dayQuantity >= $jumlah){
+							$baru = $monthQuantity - $jumlah;
+							$sequal = "UPDATE users SET quantity='".$baru."' WHERE username ='".$me."' AND pass ='".$p."' AND id ='".$link."'";
 							$sets =  mysql_query ($sequal);
-							
-							$newWeek = $QuanWeek - $_POST['jumlah'];
-							$Sequalweek = "UPDATE users SET weekQuantity = '".$newWeek."' WHERE username = '".$me."' AND pass = '".$p."' AND id = '".$link."'";
+							$limitWeekBaru = $weekQuantity - $_POST['jumlah'];
+							$Sequalweek = "UPDATE users SET weekQuantity = '".$limitWeekBaru."' WHERE username = '".$me."' AND pass = '".$p."' AND id = '".$link."'";
 							$SetWeek = mysql_query ($Sequalweek);
 							
-							$newday = $Quanday - $_POST['jumlah'];
+							$newday = $dayQuantity - $_POST['jumlah'];
 							$Sequalday = "UPDATE users SET dayQuantity = '".$newday."' WHERE username = '".$me."' AND pass = '".$p."' AND id = '".$link."'";
 							$SetDay = mysql_query ($Sequalday);
 							
@@ -572,6 +559,7 @@ if($submit)
 <fieldset>
 	<form action='' method='post'>
     
+						<?php	echo 'tolong la '.$me ."". $p .'and'. $id; ?>
     <?php
 
 if (isset($_GET['msg']))

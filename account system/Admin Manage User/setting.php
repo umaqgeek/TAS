@@ -83,12 +83,7 @@ if ($update){
 			</ul> <!-- end nav -->
 
 					
-			<form action="#" method="POST" id="search-form" class="fr">
-				<fieldset>
-					<input type="text" id="search-keyword" class="round button dark ic-search image-right" placeholder="Search..." />
-					<input type="hidden" value="SUBMIT" />
-				</fieldset>
-			</form>
+	
 
 		</div> <!-- end full-width -->	
 	
@@ -139,15 +134,15 @@ while ($row = mysql_fetch_array($resSum)){
 	$debit =  $row['SUM(jumlah)'];
 }
 
-$deb = $debit + $akaun;
-
-
 $sqlSub = "SELECT Jamaun, sum(jumlah) FROM account WHERE Jamaun = 'Kredit'";
 $resSub = mysql_query($sqlSub) or die(mysql_error());
 while ($row = mysql_fetch_array($resSub)){
 	$Cre =  $row['sum(jumlah)'];
 }
 
+
+$deb = $debit + $akaun;
+$balance = $deb - $Cre;
 // echo "<br /><b>Debit</b>(".$debit.") - <b>Credit</b>(".$Cre.")";
 // echo "<br />Baki = ". ($akaun + $debit - $Cre);
 // echo "<br/>akaun syarikat = ". $akaun;
@@ -169,7 +164,8 @@ while ($row = mysql_fetch_array($resSub)){
                     
 				</ul>
 				<div style="background-color:#FFF"><p>Debit ( <?php echo $debit; ?> ) - Credit ( <?php echo $Cre ?> )<br/>
-                    	Baki dalam <br /> akaun syarikat = <?php echo ($akaun + $debit - $Cre) ?></p></div>
+                    	Baki dalam <br /> akaun syarikat = <?php echo $deb ?>
+                        <br/>Balance = <?php echo $balance ?></p></div>
 			</div> <!-- end side-menu -->
 			
 

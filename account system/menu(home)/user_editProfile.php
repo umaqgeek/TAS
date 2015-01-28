@@ -66,12 +66,6 @@ $link=$_SESSION['id'];
 			</ul> <!-- end nav -->
 
 					
-<!--search---><form action="#" method="POST" id="search-form" class="fr">
-				<fieldset>
-					<input type="text" id="search-keyword" class="round button dark ic-search image-right" placeholder="Search..." />
-					<input type="hidden" value="SUBMIT" />
-				</fieldset>
-			</form>
 
 		</div> <!-- end full-width -->	
 	

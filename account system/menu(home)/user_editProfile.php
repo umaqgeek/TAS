@@ -209,8 +209,6 @@ while($call=mysql_fetch_array($file)){
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl">Profile</h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 
 					</div> <!-- end content-module-heading -->
 	</div><!--content-module-->
@@ -373,5 +371,15 @@ if ($update){
 
 	</div><!--page-full-width cf-->
 </div>
+
+
+
+	<!-- FOOTER -->
+	<div id="footer">
+
+		<p>&copy; Copyright 2015 <a href="#">Tuffah Informatic, @</a>. All rights reserved.</p>
+		<p><strong>Account System</strong> theme by <a href="http://www.buzzlee199@yahoo.com">buzzlee199@yahoo.com</a></p>
+	
+	</div> <!-- end footer -->
 </body>
 </html>

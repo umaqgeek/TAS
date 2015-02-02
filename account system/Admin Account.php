@@ -155,8 +155,6 @@ while ($row = mysql_fetch_array($resSub)){
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl">Table Account(new)</h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
 					</div> <!-- end content-module-heading -->
 					
@@ -227,8 +225,6 @@ if ($disemak){
 				echo "<div class='content-module-heading cf'>";
 					
 					echo "<h3 class='fl'>Table Account(old)</h3>";
-					echo "<span class='fr expand-collapse-text'>Click to collapse</span>";
-					echo "<span class='fr expand-collapse-text initial-expand'>Click to expand</span>";
 					
 				echo "</div> <!-- end content-module-heading -->";
 					echo "<table>";

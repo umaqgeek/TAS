@@ -177,8 +177,6 @@ $balance = $deb - $Cre;
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"><b>setting transfer limit</b></h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
 					</div> <!-- end content-module-heading -->
                     <br/>
@@ -208,7 +206,51 @@ $balance = $deb - $Cre;
 	<br/><br/><br/>				
 				
 
-				
+<!-------------limit per second ------------------------------------------------------------------------->
+
+<?php
+$code='1';
+$tukar = $_POST['tukar'];
+$sqltukar = "SELECT * FROM setting WHERE id ='".$code."'";
+$querytukar = mysql_query($sqltukar);
+while($LPS=mysql_fetch_array($querytukar)){
+	$old = $LPS['quota']; 
+	
+}
+if ($tukar){
+	$new=$_POST['tetap'];
+	mysql_query("update setting set quota='".$new."' where id='".$code."'");
+	$_SESSION['auth']=true;
+	header ("Location: setting.php");
+	exit();
+}
+
+?>
+
+					<div class="content-module-heading cf">
+					
+						<h3 class="fl"><b>setting limit transfer per second</b></h3>
+					
+					</div> <!-- end content-module-heading -->
+                    <br/>
+		<fieldset>
+        <div align="center">
+	<form action='' method='post'>
+	
+	
+	<p>
+	<label><b>limit persecond</b></label>
+	<input id='simple-input' class='round default-width-input' type='text' name="tetap" value="<?php echo $old ?>">
+	</p>
+	
+	
+	
+	<input type='submit' value='update' name="tukar" class='round blue ic-right-arrow' />
+	</form>
+    </div><!-- end half-size-column -->
+	</fieldset>			
+	<br/><br/><br/>
+						
  <!------------------------------------setting account balance------------------------------------------->
 <?php
 
@@ -217,7 +259,8 @@ $ubah = $_POST['ubah'];
 $SQL = "SELECT * FROM setting WHERE id ='".$set."'";
 $QUERY = mysql_query($SQL);
 while($Ub=mysql_fetch_array($QUERY)){
-	$oldBaki = $Ub['Baki']; 
+	$oldBaki = $Ub['Baki'];
+	
 	
 }
 if ($ubah){
@@ -234,8 +277,6 @@ if ($ubah){
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"><b>setting account balance</b></h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
 					</div> <!-- end content-module-heading -->
                     <br/>
@@ -246,7 +287,7 @@ if ($ubah){
 	
 	<p>
 	<label><b>Akaun bulan ini</b></label>
-	<input id='simple-input' class='round default-width-input' type='text' type='text' name="Baki" value="<?php echo $oldBaki ?>">
+	<input id='simple-input' class='round default-width-input' type='text' name="Baki" value="<?php echo $oldBaki ?>">
 	</p>
 	
 	
@@ -281,8 +322,6 @@ if($submit){
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl"><b>setting up type of bank for user make a transfer</b></h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
 					</div> <!-- end content-module-heading -->
                     <br/>

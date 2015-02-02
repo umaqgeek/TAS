@@ -115,8 +115,6 @@ require("connect_manageUser.php");
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl">Table staff</h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
 					</div> <!-- end content-module-heading -->
 					
@@ -198,8 +196,6 @@ echo "<div class='content-module'>";
 				echo"<div class='content-module-heading cf'>";
 					
 					echo "<h3 class='fl'>Edit detail</h3>";
-					echo "<span class='fr expand-collapse-text'>Click to collapse</span>";
-					echo "<span class='fr expand-collapse-text initial-expand'>Click to expand</span>";
 					
 				echo "</div> <!-- end content-module-heading -->";
 echo "</div>";
@@ -286,8 +282,6 @@ echo "<br/>";
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl">Add Staff</h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 
 					</div> <!-- end content-module-heading -->
 </div>

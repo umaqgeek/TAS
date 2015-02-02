@@ -117,6 +117,7 @@ $link=$_SESSION['id'];
 <ul style='background:white'>
 <?php
 
+
 $acc = "SELECT Jamaun, COUNT(name), SUM(jumlah) FROM account WHERE name='".$me."' AND link_id='".$link."' GROUP BY Jamaun "; 
 $res = mysql_query($acc) or die(mysql_error());
 
@@ -128,9 +129,10 @@ while($row = mysql_fetch_array($res)){
 }
 
 //total account balance - total user debit
-$sqlbaki=mysql_query("SELECT Baki FROM setting");
+$sqlbaki=mysql_query("SELECT * FROM setting");
 while($baki=mysql_fetch_array($sqlbaki)){
 	$akaun=$baki['Baki'];
+	$limitPersecond=$baki['quota'];
 	}
 
 $sqlSum = "SELECT Jamaun, SUM(jumlah) FROM account WHERE Jamaun = 'Debit' AND name='".$me."'"; 
@@ -150,9 +152,9 @@ $deb = $debit + $akaun;
 $balance = $deb - $Cre;
 
 //echo $deb ."-" .$Cre ."=". $balance;
-echo "<li><p><b>Total balance from <br/> account = </b>".$deb." <br/> <b>Credit from you = </b>".$Cre."";
+echo "<li><p><b>Debit + balance in <br/>company account = </b>".$deb." <br/> <b>Credit from you = </b>".$Cre."";
 echo "<br/>Balance in company account ".$akaun;
-echo "<br />Total Balance = ".$balance."</p></li>";
+echo "<br /><b>Total Balance = ".$balance."</b></p></li>";
 
 
 
@@ -202,8 +204,6 @@ while ($day = mysql_fetch_array($D)){
 					<div class="content-module-heading cf">
 					
 						<h3 class="fl">Table Account(new)</h3>
-						<span class="fr expand-collapse-text">Click to collapse</span>
-						<span class="fr expand-collapse-text initial-expand">Click to expand</span>
 					
 					</div> <!-- end content-module-heading -->
 					
@@ -394,8 +394,6 @@ if ($update){
 				<div class='content-module-heading cf'>
 					
 					<h3 class='fl'>Table Account(old)</h3>
-					<span class='fr expand-collapse-text'>Click to collapse</span>
-					<span class='fr expand-collapse-text initial-expand'>Click to expand</span>
 					
 				</div> <!-- end content-module-heading -->
 					
@@ -474,7 +472,9 @@ if($submit)
 			exit();
 		}
 		
-		else if($jumlah > $akaun){
+
+		else if($jumlah > $limitPersecond){
+			echo "sory der,terlebih ni,buat sikit-sikit";
 			$_SESSION['auth']=true;
 			header ("Location: User_CheckTransaction.php?msg=6");
 			exit();
@@ -559,7 +559,6 @@ if($submit)
 <fieldset>
 	<form action='' method='post'>
     
-						<?php	echo 'tolong la '.$me ."". $p .'and'. $id; ?>
     <?php
 
 if (isset($_GET['msg']))
@@ -578,7 +577,7 @@ if (isset($_GET['msg']))
 	if($message == 5)
 	echo "<span style='color:red;'>Sila semak form anda</span>";
 	if($message == 6)
-	echo "<span style='color:red;'>Sorry lah derrr setiap transaksi hanya boleh dibuat kurang dari RM ".$akaun." sekali</span>";
+	echo "<span style='color:red;'>Sorry lah derrr setiap transaksi hanya boleh dibuat kurang dari RM ".$limitPersecond." sekali</span>";
 	if($message == 7)
 	echo "<span style='color:green;'>Congrates!!!</span>";
 }
